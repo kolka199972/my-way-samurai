@@ -5,19 +5,29 @@ const Navbar = () => {
   return (
     <nav className={s.nav}>
       <div>
-        <button className={`${s.item} ${s.active}`}>Profile</button>
+        <a href='/profile' className={`${s.item} ${s.active}`}>
+          Profile
+        </a>
       </div>
       <div>
-        <button className={s.item}>Messages</button>
+        <a href='/dialogs' className={s.item}>
+          Messages
+        </a>
       </div>
       <div>
-        <button className={s.item}>News</button>
+        <a href='/news' className={s.item}>
+          News
+        </a>
       </div>
       <div>
-        <button className={s.item}>Music</button>
+        <a href='/music' className={s.item}>
+          Music
+        </a>
       </div>
       <div>
-        <button className={s.item}>Settings</button>
+        <a href='/settings' className={s.item}>
+          Settings
+        </a>
       </div>
     </nav>
   )

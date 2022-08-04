@@ -17,6 +17,7 @@ const App = ({messagesData, postsData, dialogsData}) => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Routes>
+            {/* 'component=""' change on 'render=""' */}
             <Route path='/profile' element={<Profile {...{postsData}} />} />
             <Route
               path='/dialogs/*'

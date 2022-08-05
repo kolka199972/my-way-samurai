@@ -1,3 +1,5 @@
+import {reRenderDOM} from '../render'
+
 const state = {
   profilePage: {
     posts: [
@@ -36,6 +38,8 @@ export const addPost = (text) => {
   const newPost = {id: Date.now(), message: text, likesCount: 42}
 
   state.profilePage.posts.push(newPost)
+
+  reRenderDOM(state)
 }
 
 export default state

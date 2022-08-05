@@ -8,6 +8,7 @@ const MyPosts = ({posts, onAddPost}) => {
   const createNewPost = () => {
     const text = newPostElement.current.value
     onAddPost(text)
+    newPostElement.current.value = ''
   }
 
   const postsElements = posts.map((p) => (

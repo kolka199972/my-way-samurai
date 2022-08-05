@@ -1,8 +1,9 @@
 import React from 'react'
 import s from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
+import SideBar from './SideBar/SideBar'
 
-const Navbar = () => {
+const Navbar = ({state}) => {
   return (
     <nav className={s.nav}>
       <div>
@@ -45,6 +46,7 @@ const Navbar = () => {
           Settings
         </NavLink>
       </div>
+      <SideBar friends={state.friends} />
     </nav>
   )
 }

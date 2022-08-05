@@ -2,8 +2,8 @@ import React from 'react'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
-const MyPosts = ({postsData}) => {
-  const postsElements = postsData.map((p) => (
+const MyPosts = ({posts}) => {
+  const postsElements = posts.map((p) => (
     <Post key={p.id} message={p.message} likesCount={p.likesCount} />
   ))
 

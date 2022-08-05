@@ -9,18 +9,21 @@ import News from './components/News/News'
 import Profile from './components/Profile/Profile'
 import Settings from './components/Settings/Settings'
 
-const App = ({messagesData, postsData, dialogsData}) => {
+const App = ({state}) => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
-        <Navbar />
+        <Navbar state={state.sideBar} />
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='/profile' element={<Profile {...{postsData}} />} />
+            <Route
+              path='/profile'
+              element={<Profile state={state.profilePage} />}
+            />
             <Route
               path='/dialogs/*'
-              element={<Dialogs {...{messagesData, dialogsData}} />}
+              element={<Dialogs state={state.dialogsPage} />}
             />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />

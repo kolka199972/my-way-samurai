@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import './App.css'
 import Dialogs from './components/Dialogs/Dialogs'
 import Header from './components/Header/Header'
@@ -11,27 +11,25 @@ import Settings from './components/Settings/Settings'
 
 const App = ({state}) => {
   return (
-    <BrowserRouter>
-      <div className='app-wrapper'>
-        <Header />
-        <Navbar state={state.sideBar} />
-        <div className='app-wrapper-content'>
-          <Routes>
-            <Route
-              path='/profile'
-              element={<Profile state={state.profilePage} />}
-            />
-            <Route
-              path='/dialogs/*'
-              element={<Dialogs state={state.dialogsPage} />}
-            />
-            <Route path='/news' element={<News />} />
-            <Route path='/music' element={<Music />} />
-            <Route path='/settings' element={<Settings />} />
-          </Routes>
-        </div>
+    <div className='app-wrapper'>
+      <Header />
+      <Navbar state={state.sideBar} />
+      <div className='app-wrapper-content'>
+        <Routes>
+          <Route
+            path='/profile'
+            element={<Profile state={state.profilePage} />}
+          />
+          <Route
+            path='/dialogs/*'
+            element={<Dialogs state={state.dialogsPage} />}
+          />
+          <Route path='/news' element={<News />} />
+          <Route path='/music' element={<Music />} />
+          <Route path='/settings' element={<Settings />} />
+        </Routes>
       </div>
-    </BrowserRouter>
+    </div>
   )
 }
 

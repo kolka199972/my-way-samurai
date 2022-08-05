@@ -2,11 +2,12 @@ import React from 'react'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
-const MyPosts = ({posts}) => {
+const MyPosts = ({posts, onAddPost}) => {
   const newPostElement = React.createRef()
 
   const createNewPost = () => {
-    console.log(newPostElement.current.value)
+    const text = newPostElement.current.value
+    onAddPost(text)
   }
 
   const postsElements = posts.map((p) => (

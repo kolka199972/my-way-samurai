@@ -9,7 +9,7 @@ import News from './components/News/News'
 import Profile from './components/Profile/Profile'
 import Settings from './components/Settings/Settings'
 
-const App = ({state}) => {
+const App = ({state, onAddPost}) => {
   return (
     <div className='app-wrapper'>
       <Header />
@@ -18,7 +18,9 @@ const App = ({state}) => {
         <Routes>
           <Route
             path='/profile'
-            element={<Profile state={state.profilePage} />}
+            element={
+              <Profile state={state.profilePage} onAddPost={onAddPost} />
+            }
           />
           <Route
             path='/dialogs/*'

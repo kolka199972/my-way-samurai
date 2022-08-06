@@ -1,4 +1,4 @@
-import {reRenderDOM} from '../render'
+import {rerenderDOM} from '../render'
 
 const state = {
   profilePage: {
@@ -7,7 +7,8 @@ const state = {
       {id: 2, message: "It's my first post", likesCount: 25},
       {id: 3, message: 'Visual Studio Code', likesCount: 24},
       {id: 4, message: 'WebStorm', likesCount: 42}
-    ]
+    ],
+    newPostText: ''
   },
   dialogsPage: {
     dialogs: [
@@ -21,9 +22,9 @@ const state = {
       {id: 1, message: 'Hi'},
       {id: 2, message: 'I am Lion'},
       {id: 3, message: 'My name'},
-      {id: 4, message: 'Yo'},
-      {id: 5, message: 'Yoooo'}
-    ]
+      {id: 4, message: 'Yo'}
+    ],
+    newMessageText: ''
   },
   sideBar: {
     friends: [
@@ -34,12 +35,35 @@ const state = {
   }
 }
 
-export const addPost = (text) => {
-  const newPost = {id: Date.now(), message: text, likesCount: 42}
-
+export const addPost = () => {
+  const newPost = {
+    id: Date.now(),
+    message: state.profilePage.newPostText,
+    likesCount: 42
+  }
   state.profilePage.posts.push(newPost)
+  state.profilePage.newPostText = ''
+  rerenderDOM(state)
+}
 
-  reRenderDOM(state)
+export const updateNewPostText = (text) => {
+  state.profilePage.newPostText = text
+  rerenderDOM(state)
+}
+
+export const addMessage = () => {
+  const newMessage = {
+    id: Date.now(),
+    message: state.dialogsPage.newMessageText
+  }
+  state.dialogsPage.messages.push(newMessage)
+  state.dialogsPage.newMessageText = ''
+  rerenderDOM(state)
+}
+
+export const updateNewMessageText = (text) => {
+  state.dialogsPage.newMessageText = text
+  rerenderDOM(state)
 }
 
 export default state

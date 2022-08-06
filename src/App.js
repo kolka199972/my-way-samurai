@@ -9,7 +9,13 @@ import News from './components/News/News'
 import Profile from './components/Profile/Profile'
 import Settings from './components/Settings/Settings'
 
-const App = ({state, onAddPost}) => {
+const App = ({
+  state,
+  onUpdateNewPostText,
+  onUpdateNewMessageText,
+  onAddMessage,
+  onAddPost
+}) => {
   return (
     <div className='app-wrapper'>
       <Header />
@@ -19,12 +25,22 @@ const App = ({state, onAddPost}) => {
           <Route
             path='/profile'
             element={
-              <Profile state={state.profilePage} onAddPost={onAddPost} />
+              <Profile
+                onUpdateNewPostText={onUpdateNewPostText}
+                state={state.profilePage}
+                onAddPost={onAddPost}
+              />
             }
           />
           <Route
             path='/dialogs/*'
-            element={<Dialogs state={state.dialogsPage} />}
+            element={
+              <Dialogs
+                state={state.dialogsPage}
+                onAddMessage={onAddMessage}
+                onUpdateNewMessageText={onUpdateNewMessageText}
+              />
+            }
           />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />

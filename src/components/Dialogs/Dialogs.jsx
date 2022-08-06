@@ -3,11 +3,15 @@ import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
 
-const Dialogs = ({state}) => {
+const Dialogs = ({state, onUpdateNewMessageText, onAddMessage}) => {
   const newMessageElement = React.createRef()
 
   const createMessage = () => {
-    console.log(newMessageElement.current.value)
+    onAddMessage()
+  }
+  const onUpdateText = () => {
+    const text = newMessageElement.current.value
+    onUpdateNewMessageText(text)
   }
 
   const dialogsElements = state.dialogs.map((d) => (
@@ -23,7 +27,11 @@ const Dialogs = ({state}) => {
       <div className={s.messages}>{messagesElements}</div>
       <div>
         <div>
-          <textarea ref={newMessageElement}></textarea>
+          <textarea
+            value={state.newMessageText}
+            onChange={onUpdateText}
+            ref={newMessageElement}
+          ></textarea>
         </div>
         <div>
           <button onClick={createMessage}>Add post</button>

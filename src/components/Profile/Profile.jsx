@@ -3,11 +3,16 @@ import MyPosts from './MyPosts/MyPosts'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 // import s from './Profile.module.css'
 
-const Profile = ({state, onAddPost}) => {
+const Profile = ({state, onAddPost, onUpdateNewPostText}) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts onAddPost={onAddPost} posts={state.posts} />
+      <MyPosts
+        newPostText={state.newPostText}
+        onUpdateNewPostText={onUpdateNewPostText}
+        onAddPost={onAddPost}
+        posts={state.posts}
+      />
     </div>
   )
 }

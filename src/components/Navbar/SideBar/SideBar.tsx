@@ -2,7 +2,14 @@ import React from 'react'
 import Friend from './Friend/Friend'
 import s from './SideBar.module.css'
 
-const SideBar = ({friends}) => {
+interface SideBarProps {
+  friends: Array<{
+    id: number
+    name: string
+  }>
+}
+
+const SideBar = ({friends}: SideBarProps) => {
   const friendsElements = friends.map((f) => (
     <Friend key={f.id} name={f.name} />
   ))

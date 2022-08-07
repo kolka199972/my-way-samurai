@@ -1,16 +1,32 @@
-import React from 'react'
+import React, {RefObject} from 'react'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
-const MyPosts = ({posts, onAddPost, onUpdateNewPostText, newPostText}) => {
-  const newPostElement = React.createRef()
+interface MyPostsProps {
+  posts: Array<{
+    id: number
+    message: string
+    likesCount: number
+  }>
+  newPostText: string
+  onAddPost: () => void
+  onUpdateNewPostText: (val: string) => void
+}
+
+const MyPosts = ({
+  posts,
+  onAddPost,
+  onUpdateNewPostText,
+  newPostText
+}: MyPostsProps) => {
+  const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
   const createNewPost = () => {
     onAddPost()
   }
 
   const onPostChange = () => {
-    const text = newPostElement.current.value
+    const text = newPostElement.current!.value
     onUpdateNewPostText(text)
   }
 

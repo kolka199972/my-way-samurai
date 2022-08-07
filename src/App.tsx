@@ -8,6 +8,15 @@ import Navbar from './components/Navbar/Navbar'
 import News from './components/News/News'
 import Profile from './components/Profile/Profile'
 import Settings from './components/Settings/Settings'
+import {IState} from './models'
+
+interface AppProps {
+  state: IState
+  onUpdateNewMessageText: (val: string) => void
+  onAddMessage: () => void
+  onUpdateNewPostText: (val: string) => void
+  onAddPost: () => void
+}
 
 const App = ({
   state,
@@ -15,11 +24,11 @@ const App = ({
   onUpdateNewMessageText,
   onAddMessage,
   onAddPost
-}) => {
+}: AppProps) => {
   return (
     <div className='app-wrapper'>
       <Header />
-      <Navbar state={state.sideBar} />
+      <Navbar sideBar={state.sideBar} />
       <div className='app-wrapper-content'>
         <Routes>
           <Route
@@ -27,7 +36,7 @@ const App = ({
             element={
               <Profile
                 onUpdateNewPostText={onUpdateNewPostText}
-                state={state.profilePage}
+                profilePage={state.profilePage}
                 onAddPost={onAddPost}
               />
             }
@@ -36,7 +45,7 @@ const App = ({
             path='/dialogs/*'
             element={
               <Dialogs
-                state={state.dialogsPage}
+                dialogsPage={state.dialogsPage}
                 onAddMessage={onAddMessage}
                 onUpdateNewMessageText={onUpdateNewMessageText}
               />

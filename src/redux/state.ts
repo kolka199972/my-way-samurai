@@ -1,6 +1,7 @@
+import {IState} from './../models'
 import {rerenderDOM} from '../render'
 
-const state = {
+const state: IState = {
   profilePage: {
     posts: [
       {id: 1, message: 'How are you?', likesCount: 20},
@@ -46,7 +47,7 @@ export const addPost = () => {
   rerenderDOM(state)
 }
 
-export const updateNewPostText = (text) => {
+export const updateNewPostText = (text: string) => {
   state.profilePage.newPostText = text
   rerenderDOM(state)
 }
@@ -61,7 +62,7 @@ export const addMessage = () => {
   rerenderDOM(state)
 }
 
-export const updateNewMessageText = (text) => {
+export const updateNewMessageText = (text: string) => {
   state.dialogsPage.newMessageText = text
   rerenderDOM(state)
 }

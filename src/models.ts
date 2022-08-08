@@ -1,27 +1,41 @@
+export interface IPost {
+  id: number
+  message: string
+  likesCount: number
+}
+
+export interface IDialog {
+  id: number
+  name: string
+}
+
+export interface IMessage {
+  id: number
+  message: string
+}
+
+export interface IFriend {
+  id: number
+  name: string
+}
+
+export interface IProfilePage {
+  posts: IPost[]
+  newPostText: string
+}
+
+export interface IDialogsPage {
+  dialogs: IDialog[]
+  messages: IMessage[]
+  newMessageText: string
+}
+
+export interface ISidebar {
+  friends: IFriend[]
+}
+
 export interface IState {
-  profilePage: {
-    posts: Array<{
-      id: number
-      message: string
-      likesCount: number
-    }>
-    newPostText: string
-  }
-  dialogsPage: {
-    dialogs: Array<{
-      id: number
-      name: string
-    }>
-    messages: Array<{
-      id: number
-      message: string
-    }>
-    newMessageText: string
-  }
-  sideBar: {
-    friends: Array<{
-      id: number
-      name: string
-    }>
-  }
+  profilePage: IProfilePage
+  dialogsPage: IDialogsPage
+  sidebar: ISidebar
 }

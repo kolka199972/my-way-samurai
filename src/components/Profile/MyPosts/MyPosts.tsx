@@ -1,13 +1,10 @@
 import React, {RefObject} from 'react'
+import {IPost} from '../../../models'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
 interface MyPostsProps {
-  posts: Array<{
-    id: number
-    message: string
-    likesCount: number
-  }>
+  posts: IPost[]
   newPostText: string
   onAddPost: () => void
   onUpdateNewPostText: (val: string) => void

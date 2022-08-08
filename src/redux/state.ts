@@ -27,7 +27,7 @@ const state: IState = {
     ],
     newMessageText: ''
   },
-  sideBar: {
+  sidebar: {
     friends: [
       {id: 1, name: 'Julia'},
       {id: 2, name: 'Kirill'},

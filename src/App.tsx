@@ -28,7 +28,7 @@ const App = ({
   return (
     <div className='app-wrapper'>
       <Header />
-      <Navbar sideBar={state.sideBar} />
+      <Navbar sidebar={state.sidebar} />
       <div className='app-wrapper-content'>
         <Routes>
           <Route

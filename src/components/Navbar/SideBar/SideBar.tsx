@@ -1,12 +1,10 @@
 import React from 'react'
+import {IFriend} from '../../../models'
 import Friend from './Friend/Friend'
-import s from './SideBar.module.css'
+import s from './Sidebar.module.css'
 
 interface SideBarProps {
-  friends: Array<{
-    id: number
-    name: string
-  }>
+  friends: IFriend[]
 }
 
 const SideBar = ({friends}: SideBarProps) => {

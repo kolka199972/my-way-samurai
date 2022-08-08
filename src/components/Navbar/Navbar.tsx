@@ -1,18 +1,14 @@
 import React from 'react'
 import s from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
-import SideBar from './SideBar/SideBar'
+import Sidebar from './Sidebar/Sidebar'
+import {ISidebar} from '../../models'
 
 interface NavbarProps {
-  sideBar: {
-    friends: Array<{
-      id: number
-      name: string
-    }>
-  }
+  sidebar: ISidebar
 }
 
-const Navbar = ({sideBar}: NavbarProps) => {
+const Navbar = ({sidebar}: NavbarProps) => {
   return (
     <nav className={s.nav}>
       <div>
@@ -55,7 +51,7 @@ const Navbar = ({sideBar}: NavbarProps) => {
           Settings
         </NavLink>
       </div>
-      <SideBar friends={sideBar.friends} />
+      <Sidebar friends={sidebar.friends} />
     </nav>
   )
 }

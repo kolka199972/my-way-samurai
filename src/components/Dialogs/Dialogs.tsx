@@ -1,20 +1,11 @@
 import React, {RefObject} from 'react'
+import {IDialogsPage} from '../../models'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
 
 interface DialogsProps {
-  dialogsPage: {
-    dialogs: Array<{
-      id: number
-      name: string
-    }>
-    messages: Array<{
-      id: number
-      message: string
-    }>
-    newMessageText: string
-  }
+  dialogsPage: IDialogsPage
   onUpdateNewMessageText: (val: string) => void
   onAddMessage: () => void
 }

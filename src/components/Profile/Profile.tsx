@@ -1,17 +1,11 @@
 import React from 'react'
+import {IProfilePage} from '../../models'
 import MyPosts from './MyPosts/MyPosts'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 // import s from './Profile.module.css'
 
 interface ProfileProps {
-  profilePage: {
-    posts: Array<{
-      id: number
-      message: string
-      likesCount: number
-    }>
-    newPostText: string
-  }
+  profilePage: IProfilePage
   onAddPost: () => void
   onUpdateNewPostText: (val: string) => void
 }

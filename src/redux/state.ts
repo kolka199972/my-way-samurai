@@ -1,5 +1,8 @@
 import {IState} from './../models'
-import {rerenderDOM} from '../render'
+
+let rerenderDOM = (state: IState) => {
+  console.log(state)
+}
 
 const state: IState = {
   profilePage: {
@@ -65,6 +68,10 @@ export const addMessage = () => {
 export const updateNewMessageText = (text: string) => {
   state.dialogsPage.newMessageText = text
   rerenderDOM(state)
+}
+
+export const subscribe = (callback: (state: IState) => void) => {
+  rerenderDOM = callback
 }
 
 export default state

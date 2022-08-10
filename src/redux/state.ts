@@ -3,7 +3,7 @@ import {IState} from './../models'
 let rerenderDOM = (state: IState) => {
   console.log(state)
 }
-
+// OOP
 const state: IState = {
   profilePage: {
     posts: [

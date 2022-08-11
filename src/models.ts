@@ -39,3 +39,14 @@ export interface IState {
   dialogsPage: IDialogsPage
   sidebar: ISidebar
 }
+
+export interface IStore {
+  _state: IState
+  getState: () => IState
+  _callObserver: (state: IState) => void
+  addPost: () => void
+  updateNewPostText: (text: string) => void
+  addMessage: () => void
+  updateNewMessageText: (text: string) => void
+  subscribe: (callback: (state: IState) => void) => void
+}

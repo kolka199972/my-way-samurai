@@ -1,77 +1,74 @@
-import {IState} from './../models'
+import {IStore} from './../models'
 
-let rerenderDOM = (state: IState) => {
-  console.log(state)
-}
-// OOP
-const state: IState = {
-  profilePage: {
-    posts: [
-      {id: 1, message: 'How are you?', likesCount: 20},
-      {id: 2, message: "It's my first post", likesCount: 25},
-      {id: 3, message: 'Visual Studio Code', likesCount: 24},
-      {id: 4, message: 'WebStorm', likesCount: 42}
-    ],
-    newPostText: ''
+const store: IStore = {
+  _state: {
+    profilePage: {
+      posts: [
+        {id: 1, message: 'How are you?', likesCount: 20},
+        {id: 2, message: "It's my first post", likesCount: 25},
+        {id: 3, message: 'Visual Studio Code', likesCount: 24},
+        {id: 4, message: 'WebStorm', likesCount: 42}
+      ],
+      newPostText: ''
+    },
+    dialogsPage: {
+      dialogs: [
+        {id: 1, name: 'Kolya'},
+        {id: 2, name: 'Julia'},
+        {id: 3, name: 'Kirill'},
+        {id: 4, name: 'Dasha'},
+        {id: 5, name: 'Sveta'}
+      ],
+      messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'I am Lion'},
+        {id: 3, message: 'My name'},
+        {id: 4, message: 'Yo'}
+      ],
+      newMessageText: ''
+    },
+    sidebar: {
+      friends: [
+        {id: 1, name: 'Julia'},
+        {id: 2, name: 'Kirill'},
+        {id: 3, name: 'Roma'}
+      ]
+    }
   },
-  dialogsPage: {
-    dialogs: [
-      {id: 1, name: 'Kolya'},
-      {id: 2, name: 'Julia'},
-      {id: 3, name: 'Kirill'},
-      {id: 4, name: 'Dasha'},
-      {id: 5, name: 'Sveta'}
-    ],
-    messages: [
-      {id: 1, message: 'Hi'},
-      {id: 2, message: 'I am Lion'},
-      {id: 3, message: 'My name'},
-      {id: 4, message: 'Yo'}
-    ],
-    newMessageText: ''
+  getState() {
+    return this._state
   },
-  sidebar: {
-    friends: [
-      {id: 1, name: 'Julia'},
-      {id: 2, name: 'Kirill'},
-      {id: 3, name: 'Roma'}
-    ]
+  _callObserver() {},
+  addPost() {
+    const newPost = {
+      id: Date.now(),
+      message: this._state.profilePage.newPostText,
+      likesCount: 42
+    }
+    this._state.profilePage.posts.push(newPost)
+    this._state.profilePage.newPostText = ''
+    this._callObserver(this._state)
+  },
+  updateNewPostText(text) {
+    this._state.profilePage.newPostText = text
+    this._callObserver(this._state)
+  },
+  addMessage() {
+    const newMessage = {
+      id: Date.now(),
+      message: this._state.dialogsPage.newMessageText
+    }
+    this._state.dialogsPage.messages.push(newMessage)
+    this._state.dialogsPage.newMessageText = ''
+    this._callObserver(this._state)
+  },
+  updateNewMessageText(text) {
+    this._state.dialogsPage.newMessageText = text
+    this._callObserver(this._state)
+  },
+  subscribe(callback) {
+    this._callObserver = callback
   }
 }
 
-export const addPost = () => {
-  const newPost = {
-    id: Date.now(),
-    message: state.profilePage.newPostText,
-    likesCount: 42
-  }
-  state.profilePage.posts.push(newPost)
-  state.profilePage.newPostText = ''
-  rerenderDOM(state)
-}
-
-export const updateNewPostText = (text: string) => {
-  state.profilePage.newPostText = text
-  rerenderDOM(state)
-}
-
-export const addMessage = () => {
-  const newMessage = {
-    id: Date.now(),
-    message: state.dialogsPage.newMessageText
-  }
-  state.dialogsPage.messages.push(newMessage)
-  state.dialogsPage.newMessageText = ''
-  rerenderDOM(state)
-}
-
-export const updateNewMessageText = (text: string) => {
-  state.dialogsPage.newMessageText = text
-  rerenderDOM(state)
-}
-
-export const subscribe = (callback: (state: IState) => void) => {
-  rerenderDOM = callback
-}
-
-export default state
+export default store

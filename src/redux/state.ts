@@ -1,5 +1,10 @@
 import {IStore} from './../models'
 
+const ADD_POST = 'ADD_POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
+const ADD_MESSAGE = 'ADD_MESSAGE'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
+
 const store: IStore = {
   _state: {
     profilePage: {
@@ -74,6 +79,22 @@ const store: IStore = {
   subscribe(callback) {
     this._callObserver = callback
   }
+}
+
+export function addPostActionCreator() {
+  return {type: ADD_POST}
+}
+
+export function updateNewPostTextActionCreator(text: string) {
+  return {type: UPDATE_NEW_POST_TEXT, newText: text}
+}
+
+export function addMessageActionCreator() {
+  return {type: ADD_MESSAGE}
+}
+
+export function updateNewMessageTextActionCreator(text: string) {
+  return {type: UPDATE_NEW_MESSAGE_TEXT, newText: text}
 }
 
 export default store

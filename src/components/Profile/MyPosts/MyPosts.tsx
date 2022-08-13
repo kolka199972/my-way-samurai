@@ -1,5 +1,9 @@
 import React, {RefObject} from 'react'
 import {IAction, IPost} from '../../../models'
+import {
+  addPostActionCreator,
+  updateNewPostTextActionCreator
+} from '../../../redux/state'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
@@ -13,12 +17,12 @@ const MyPosts = ({posts, dispatch, newPostText}: MyPostsProps) => {
   const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
   const createNewPost = () => {
-    dispatch({type: 'ADD_POST'})
+    dispatch(addPostActionCreator())
   }
 
   const onPostChange = () => {
     const text = newPostElement.current!.value
-    dispatch({type: 'UPDATE_NEW_POST_TEXT', newText: text})
+    dispatch(updateNewPostTextActionCreator(text))
   }
 
   const postsElements = posts.map((p) => (

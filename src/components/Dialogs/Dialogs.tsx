@@ -1,5 +1,9 @@
 import React, {RefObject} from 'react'
 import {IAction, IDialogsPage} from '../../models'
+import {
+  addMessageActionCreator,
+  updateNewMessageTextActionCreator
+} from '../../redux/state'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
@@ -13,11 +17,11 @@ const Dialogs = ({dialogsPage, dispatch}: DialogsProps) => {
   const newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
   const createMessage = () => {
-    dispatch({type: 'ADD_MESSAGE'})
+    dispatch(addMessageActionCreator())
   }
   const onUpdateText = () => {
     const text = newMessageElement.current!.value
-    dispatch({type: 'UPDATE_NEW_MESSAGE_TEXT', newText: text})
+    dispatch(updateNewMessageTextActionCreator(text))
   }
 
   const dialogsElements = dialogsPage.dialogs.map((d) => (

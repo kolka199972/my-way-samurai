@@ -1,6 +1,6 @@
 export interface IPost {
   id: number
-  message: string
+  message: string | undefined
   likesCount: number
 }
 
@@ -11,7 +11,7 @@ export interface IDialog {
 
 export interface IMessage {
   id: number
-  message: string
+  message: string | undefined
 }
 
 export interface IFriend {
@@ -21,13 +21,13 @@ export interface IFriend {
 
 export interface IProfilePage {
   posts: IPost[]
-  newPostText: string
+  newPostText: string | undefined
 }
 
 export interface IDialogsPage {
   dialogs: IDialog[]
   messages: IMessage[]
-  newMessageText: string
+  newMessageText: string | undefined
 }
 
 export interface ISidebar {
@@ -40,13 +40,15 @@ export interface IState {
   sidebar: ISidebar
 }
 
+export interface IAction {
+  type: string
+  newText?: string
+}
+
 export interface IStore {
   _state: IState
   getState: () => IState
   _callObserver: (state: IState) => void
-  addPost: () => void
-  updateNewPostText: (text: string) => void
-  addMessage: () => void
-  updateNewMessageText: (text: string) => void
   subscribe: (callback: (state: IState) => void) => void
+  dispatch: (action: IAction) => void
 }

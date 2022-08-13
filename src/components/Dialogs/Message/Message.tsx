@@ -2,7 +2,7 @@ import React from 'react'
 import s from './../Dialogs.module.css'
 
 interface MessageProps {
-  message: string
+  message: string | undefined
 }
 
 const Message = ({message}: MessageProps) => {

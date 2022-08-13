@@ -1,30 +1,24 @@
 import React, {RefObject} from 'react'
-import {IPost} from '../../../models'
+import {IAction, IPost} from '../../../models'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
 interface MyPostsProps {
   posts: IPost[]
-  newPostText: string
-  onAddPost: () => void
-  onUpdateNewPostText: (val: string) => void
+  newPostText: string | undefined
+  dispatch: (action: IAction) => void
 }
 
-const MyPosts = ({
-  posts,
-  onAddPost,
-  onUpdateNewPostText,
-  newPostText
-}: MyPostsProps) => {
+const MyPosts = ({posts, dispatch, newPostText}: MyPostsProps) => {
   const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
   const createNewPost = () => {
-    onAddPost()
+    dispatch({type: 'ADD_POST'})
   }
 
   const onPostChange = () => {
     const text = newPostElement.current!.value
-    onUpdateNewPostText(text)
+    dispatch({type: 'UPDATE_NEW_POST_TEXT', newText: text})
   }
 
   const postsElements = posts.map((p) => (

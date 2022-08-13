@@ -35,36 +35,41 @@ const store: IStore = {
       ]
     }
   },
+  _callObserver() {},
   getState() {
     return this._state
   },
-  _callObserver() {},
-  addPost() {
-    const newPost = {
-      id: Date.now(),
-      message: this._state.profilePage.newPostText,
-      likesCount: 42
+  dispatch(action) {
+    if (action.type === 'ADD_POST') {
+      const newPost = {
+        id: Date.now(),
+        message: this._state.profilePage.newPostText,
+        likesCount: 42
+      }
+      this._state.profilePage.posts.push(newPost)
+      this._state.profilePage.newPostText = ''
+      this._callObserver(this._state)
     }
-    this._state.profilePage.posts.push(newPost)
-    this._state.profilePage.newPostText = ''
-    this._callObserver(this._state)
-  },
-  updateNewPostText(text) {
-    this._state.profilePage.newPostText = text
-    this._callObserver(this._state)
-  },
-  addMessage() {
-    const newMessage = {
-      id: Date.now(),
-      message: this._state.dialogsPage.newMessageText
+
+    if (action.type === 'UPDATE_NEW_POST_TEXT') {
+      this._state.profilePage.newPostText = action.newText
+      this._callObserver(this._state)
     }
-    this._state.dialogsPage.messages.push(newMessage)
-    this._state.dialogsPage.newMessageText = ''
-    this._callObserver(this._state)
-  },
-  updateNewMessageText(text) {
-    this._state.dialogsPage.newMessageText = text
-    this._callObserver(this._state)
+
+    if (action.type === 'ADD_MESSAGE') {
+      const newMessage = {
+        id: Date.now(),
+        message: this._state.dialogsPage.newMessageText
+      }
+      this._state.dialogsPage.messages.push(newMessage)
+      this._state.dialogsPage.newMessageText = ''
+      this._callObserver(this._state)
+    }
+
+    if (action.type === 'UPDATE_NEW_MESSAGE_TEXT') {
+      this._state.dialogsPage.newMessageText = action.newText
+      this._callObserver(this._state)
+    }
   },
   subscribe(callback) {
     this._callObserver = callback

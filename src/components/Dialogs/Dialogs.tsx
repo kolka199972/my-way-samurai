@@ -1,28 +1,23 @@
 import React, {RefObject} from 'react'
-import {IDialogsPage} from '../../models'
+import {IAction, IDialogsPage} from '../../models'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
 
 interface DialogsProps {
   dialogsPage: IDialogsPage
-  onUpdateNewMessageText: (val: string) => void
-  onAddMessage: () => void
+  dispatch: (action: IAction) => void
 }
 
-const Dialogs = ({
-  dialogsPage,
-  onUpdateNewMessageText,
-  onAddMessage
-}: DialogsProps) => {
+const Dialogs = ({dialogsPage, dispatch}: DialogsProps) => {
   const newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
   const createMessage = () => {
-    onAddMessage()
+    dispatch({type: 'ADD_MESSAGE'})
   }
   const onUpdateText = () => {
     const text = newMessageElement.current!.value
-    onUpdateNewMessageText(text)
+    dispatch({type: 'UPDATE_NEW_MESSAGE_TEXT', newText: text})
   }
 
   const dialogsElements = dialogsPage.dialogs.map((d) => (

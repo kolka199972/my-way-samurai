@@ -12,13 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const rerenderDOM = (state: IState) => {
   root.render(
     <BrowserRouter>
-      <App
-        state={store.getState()}
-        onUpdateNewPostText={store.updateNewPostText.bind(store)}
-        onAddPost={store.addPost.bind(store)}
-        onAddMessage={store.addMessage.bind(store)}
-        onUpdateNewMessageText={store.updateNewMessageText.bind(store)}
-      />
+      <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
     </BrowserRouter>
   )
 }

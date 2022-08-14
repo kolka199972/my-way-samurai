@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import reportWebVitals from './reportWebVitals'
-import store from './redux/state'
+import store from './redux/store'
 import App from './App'
 import {BrowserRouter} from 'react-router-dom'
 import {IState} from './models'
@@ -19,7 +19,10 @@ const rerenderDOM = (state: IState) => {
 
 rerenderDOM(store.getState())
 
-store.subscribe(rerenderDOM)
+store.subscribe(() => {
+  let state = store.getState()
+  rerenderDOM(state)
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

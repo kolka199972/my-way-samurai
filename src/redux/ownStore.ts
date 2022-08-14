@@ -1,4 +1,4 @@
-import {IStore} from './../models'
+import {IStore} from '../models'
 import dialogsReducer from './dialogsReducer'
 import profileReducer from './profileReducer'
 import sidebarReducer from './sidebarReducer'

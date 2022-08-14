@@ -4,8 +4,18 @@ import {IAction} from '../models'
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 
+const initialState = {
+  posts: [
+    {id: 1, message: 'How are you?', likesCount: 20},
+    {id: 2, message: "It's my first post", likesCount: 25},
+    {id: 3, message: 'Visual Studio Code', likesCount: 24},
+    {id: 4, message: 'WebStorm', likesCount: 42}
+  ],
+  newPostText: ''
+}
+
 const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
-  state,
+  state = initialState,
   action
 ) => {
   switch (action.type) {

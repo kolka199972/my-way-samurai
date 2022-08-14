@@ -81,19 +81,19 @@ const store: IStore = {
   }
 }
 
-export function addPostActionCreator() {
+export function addPostCreator() {
   return {type: ADD_POST}
 }
 
-export function updateNewPostTextActionCreator(text: string) {
+export function updateNewPostTextCreator(text: string) {
   return {type: UPDATE_NEW_POST_TEXT, newText: text}
 }
 
-export function addMessageActionCreator() {
+export function addMessageCreator() {
   return {type: ADD_MESSAGE}
 }
 
-export function updateNewMessageTextActionCreator(text: string) {
+export function updateNewMessageTextCreator(text: string) {
   return {type: UPDATE_NEW_MESSAGE_TEXT, newText: text}
 }
 

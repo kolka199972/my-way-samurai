@@ -1,6 +1,9 @@
 import React, {RefObject} from 'react'
 import {IAction, IPost} from '../../../models'
-import {addPostCreator, updateNewPostTextCreator} from '../../../redux/state'
+import {
+  addPostCreator,
+  updateNewPostTextCreator
+} from '../../../redux/profileReducer'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 

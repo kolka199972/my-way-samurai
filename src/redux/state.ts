@@ -1,9 +1,7 @@
 import {IStore} from './../models'
-
-const ADD_POST = 'ADD_POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
-const ADD_MESSAGE = 'ADD_MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
+import dialogsReducer from './dialogsReducer'
+import profileReducer from './profileReducer'
+import sidebarReducer from './sidebarReducer'
 
 const store: IStore = {
   _state: {
@@ -45,56 +43,15 @@ const store: IStore = {
     return this._state
   },
   dispatch(action) {
-    if (action.type === 'ADD_POST') {
-      const newPost = {
-        id: Date.now(),
-        message: this._state.profilePage.newPostText,
-        likesCount: 42
-      }
-      this._state.profilePage.posts.push(newPost)
-      this._state.profilePage.newPostText = ''
-      this._callObserver(this._state)
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
-    if (action.type === 'UPDATE_NEW_POST_TEXT') {
-      this._state.profilePage.newPostText = action.newText
-      this._callObserver(this._state)
-    }
-
-    if (action.type === 'ADD_MESSAGE') {
-      const newMessage = {
-        id: Date.now(),
-        message: this._state.dialogsPage.newMessageText
-      }
-      this._state.dialogsPage.messages.push(newMessage)
-      this._state.dialogsPage.newMessageText = ''
-      this._callObserver(this._state)
-    }
-
-    if (action.type === 'UPDATE_NEW_MESSAGE_TEXT') {
-      this._state.dialogsPage.newMessageText = action.newText
-      this._callObserver(this._state)
-    }
+    this._callObserver(this._state)
   },
   subscribe(callback) {
     this._callObserver = callback
   }
-}
-
-export function addPostCreator() {
-  return {type: ADD_POST}
-}
-
-export function updateNewPostTextCreator(text: string) {
-  return {type: UPDATE_NEW_POST_TEXT, newText: text}
-}
-
-export function addMessageCreator() {
-  return {type: ADD_MESSAGE}
-}
-
-export function updateNewMessageTextCreator(text: string) {
-  return {type: UPDATE_NEW_MESSAGE_TEXT, newText: text}
 }
 
 export default store

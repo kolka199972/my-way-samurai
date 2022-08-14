@@ -1,6 +1,9 @@
 import React, {RefObject} from 'react'
 import {IAction, IDialogsPage} from '../../models'
-import {addMessageCreator, updateNewMessageTextCreator} from '../../redux/state'
+import {
+  addMessageCreator,
+  updateNewMessageTextCreator
+} from '../../redux/dialogsReducer'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'

@@ -1,28 +1,30 @@
 import React, {RefObject} from 'react'
-import {IAction, IPost} from '../../../models'
-import {
-  addPostCreator,
-  updateNewPostTextCreator
-} from '../../../redux/profileReducer'
+import {IPost} from '../../../models'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
 interface MyPostsProps {
   posts: IPost[]
-  newPostText: string | undefined
-  dispatch: (action: IAction) => void
+  newPostText: string
+  onCreateNewPost: () => void
+  onUpdateNewPostText: (text: string) => void
 }
 
-const MyPosts = ({posts, dispatch, newPostText}: MyPostsProps) => {
+const MyPosts = ({
+  posts,
+  newPostText,
+  onUpdateNewPostText,
+  onCreateNewPost
+}: MyPostsProps) => {
   const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
   const createNewPost = () => {
-    dispatch(addPostCreator())
+    onCreateNewPost()
   }
 
   const onPostChange = () => {
     const text = newPostElement.current!.value
-    dispatch(updateNewPostTextCreator(text))
+    onUpdateNewPostText(text)
   }
 
   const postsElements = posts.map((p) => (

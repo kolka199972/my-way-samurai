@@ -1,23 +1,17 @@
 import React from 'react'
-import {IAction, IProfilePage} from '../../models'
-import MyPosts from './MyPosts/MyPosts'
+import MyPostsContainer from './MyPosts/MyPostsContainer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 // import s from './Profile.module.css'
 
 interface ProfileProps {
-  profilePage: IProfilePage
-  dispatch: (action: IAction) => void
+  store: any
 }
 
-const Profile = ({profilePage, dispatch}: ProfileProps) => {
+const Profile = ({store}: ProfileProps) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts
-        newPostText={profilePage.newPostText}
-        dispatch={dispatch}
-        posts={profilePage.posts}
-      />
+      <MyPostsContainer store={store} />
     </div>
   )
 }

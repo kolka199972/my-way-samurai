@@ -1,33 +1,38 @@
 import React, {RefObject} from 'react'
-import {IAction, IDialogsPage} from '../../models'
-import {
-  addMessageCreator,
-  updateNewMessageTextCreator
-} from '../../redux/dialogsReducer'
+import {IDialog, IMessage} from '../../models'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
 
 interface DialogsProps {
-  dialogsPage: IDialogsPage
-  dispatch: (action: IAction) => void
+  dialogs: IDialog[]
+  messages: IMessage[]
+  newMessageText: string
+  onCreateMessage: () => void
+  onUpdateText: (text: string) => void
 }
 
-const Dialogs = ({dialogsPage, dispatch}: DialogsProps) => {
+const Dialogs = ({
+  dialogs,
+  messages,
+  newMessageText,
+  onCreateMessage,
+  onUpdateText
+}: DialogsProps) => {
   const newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
   const createMessage = () => {
-    dispatch(addMessageCreator())
+    onCreateMessage()
   }
-  const onUpdateText = () => {
+  const updateText = () => {
     const text = newMessageElement.current!.value
-    dispatch(updateNewMessageTextCreator(text))
+    onUpdateText(text)
   }
 
-  const dialogsElements = dialogsPage.dialogs.map((d) => (
+  const dialogsElements = dialogs.map((d) => (
     <DialogItem key={d.id} name={d.name} id={d.id} />
   ))
-  const messagesElements = dialogsPage.messages.map((m) => (
+  const messagesElements = messages.map((m) => (
     <Message key={m.id} message={m.message} />
   ))
 
@@ -38,9 +43,9 @@ const Dialogs = ({dialogsPage, dispatch}: DialogsProps) => {
         <div>{messagesElements}</div>
         <div>
           <textarea
-            value={dialogsPage.newMessageText}
+            value={newMessageText}
             placeholder='Enter your message'
-            onChange={onUpdateText}
+            onChange={updateText}
             ref={newMessageElement}
           ></textarea>
         </div>

@@ -8,26 +8,16 @@ import Navbar from './components/Navbar/Navbar'
 import News from './components/News/News'
 import Profile from './components/Profile/Profile'
 import Settings from './components/Settings/Settings'
-import {IAction, IState} from './models'
 
-interface AppProps {
-  store: any
-  state: IState
-  dispatch: (action: IAction) => void
-}
-
-const App = ({state, dispatch, store}: AppProps) => {
+const App = () => {
   return (
     <div className='app-wrapper'>
       <Header />
-      <Navbar sidebar={state.sidebar} />
+      <Navbar />
       <div className='app-wrapper-content'>
         <Routes>
-          <Route path='/profile' element={<Profile store={store} />} />
-          <Route
-            path='/dialogs/*'
-            element={<DialogsContainer store={store} />}
-          />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/dialogs/*' element={<DialogsContainer />} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />

@@ -7,7 +7,7 @@ interface SideBarProps {
   friends: IFriend[]
 }
 
-const SideBar = ({friends}: SideBarProps) => {
+const Sidebar = ({friends}: SideBarProps) => {
   const friendsElements = friends.map((f) => (
     <Friend key={f.id} name={f.name} />
   ))
@@ -19,4 +19,4 @@ const SideBar = ({friends}: SideBarProps) => {
   )
 }
 
-export default SideBar
+export default Sidebar

@@ -1,14 +1,9 @@
 import React from 'react'
 import s from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
-import Sidebar from './Sidebar/Sidebar'
-import {ISidebar} from '../../models'
+import SidebarContainer from './Sidebar/SidebarContainer'
 
-interface NavbarProps {
-  sidebar: ISidebar
-}
-
-const Navbar = ({sidebar}: NavbarProps) => {
+const Navbar = () => {
   return (
     <nav className={s.nav}>
       <div>
@@ -51,7 +46,7 @@ const Navbar = ({sidebar}: NavbarProps) => {
           Settings
         </NavLink>
       </div>
-      <Sidebar friends={sidebar.friends} />
+      <SidebarContainer />
     </nav>
   )
 }

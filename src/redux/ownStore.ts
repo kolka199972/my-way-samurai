@@ -36,6 +36,70 @@ const store: IStore = {
         {id: 2, name: 'Kirill'},
         {id: 3, name: 'Roma'}
       ]
+    },
+    usersPage: {
+      users: [
+        {
+          id: 1,
+          followed: true,
+          photoUrl:
+            'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
+          fullName: 'Kirill',
+          status: 'I am the best!',
+          location: {
+            country: 'Belarus',
+            city: 'Minsk'
+          }
+        },
+        {
+          id: 2,
+          followed: true,
+          photoUrl:
+            'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
+          fullName: 'Rostik',
+          status: 'I like money!',
+          location: {
+            country: 'Belarus',
+            city: 'Minsk'
+          }
+        },
+        {
+          id: 3,
+          followed: false,
+          photoUrl:
+            'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
+          fullName: 'Ruslan',
+          status: 'I am not the best!',
+          location: {
+            country: 'Belarus',
+            city: 'Minsk'
+          }
+        },
+        {
+          id: 4,
+          followed: true,
+          photoUrl:
+            'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
+          fullName: 'Dmitriy',
+          status: 'I am boss!',
+          location: {
+            country: 'Russia',
+            city: 'Moscow'
+          }
+        },
+        {
+          id: 5,
+          followed: false,
+          photoUrl:
+            'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
+          fullName: 'Maks',
+          status: 'I search the justice!',
+          location: {
+            country: 'Ukraine',
+            city: 'Kiev'
+          }
+        }
+      ]
     }
   },
   _callObserver() {},

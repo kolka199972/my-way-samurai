@@ -19,6 +19,22 @@ export interface IFriend {
   name: string
 }
 
+export interface IUser {
+  id: number
+  followed: boolean
+  photoUrl: string
+  fullName: string
+  status: string
+  location: {
+    country: string
+    city: string
+  }
+}
+
+export interface IUsersPage {
+  users: IUser[]
+}
+
 export interface IProfilePage {
   posts: IPost[]
   newPostText: string
@@ -38,6 +54,7 @@ export interface IState {
   profilePage: IProfilePage
   dialogsPage: IDialogsPage
   sidebar: ISidebar
+  usersPage: IUsersPage
 }
 
 export type IActionAddPost = {
@@ -58,11 +75,29 @@ export type IActionUpdateNewMessageText = {
   newText: string
 }
 
+export type IACtionFollow = {
+  type: 'FOLLOW'
+  userId: number
+}
+
+export type IACtionUnfollow = {
+  type: 'UNFOLLOW'
+  userId: number
+}
+
+export type IActionSetUsers = {
+  type: 'SET_USERS'
+  users: IUser[]
+}
+
 export type IAction =
   | IActionAddPost
   | IActionUpdateNewPostText
   | IActionAddMessage
   | IActionUpdateNewMessageText
+  | IACtionFollow
+  | IACtionUnfollow
+  | IActionSetUsers
 
 export interface IStore {
   _state: IState

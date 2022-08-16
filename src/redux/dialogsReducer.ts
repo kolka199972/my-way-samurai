@@ -30,17 +30,18 @@ const dialogsReducer: (state: IDialogsPage, action: IAction) => IDialogsPage = (
         id: Date.now(),
         message: state.newMessageText
       }
-      const copyState = {...state}
-      copyState.messages = [...state.messages]
-      copyState.messages.push(newMessage)
-      copyState.newMessageText = ''
-      return copyState
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+        newMessageText: ''
+      }
     }
 
     case UPDATE_NEW_MESSAGE_TEXT: {
-      const copyState = {...state}
-      copyState.newMessageText = action.newText
-      return copyState
+      return {
+        ...state,
+        newMessageText: action.newText
+      }
     }
 
     default:

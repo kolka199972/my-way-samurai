@@ -19,24 +19,23 @@ const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
   action
 ) => {
   switch (action.type) {
-    case ADD_POST: {
+    case ADD_POST:
       const newPost = {
         id: Date.now(),
         message: state.newPostText,
         likesCount: 42
       }
-      const copyState = {...state}
-      copyState.posts = [...state.posts]
-      copyState.posts.push(newPost)
-      copyState.newPostText = ''
-      return copyState
-    }
+      return {
+        ...state,
+        posts: [...state.posts, newPost],
+        newPostText: ''
+      }
 
-    case UPDATE_NEW_POST_TEXT: {
-      const copyState = {...state}
-      copyState.newPostText = action.newText
-      return copyState
-    }
+    case UPDATE_NEW_POST_TEXT:
+      return {
+        ...state,
+        newPostText: action.newText
+      }
 
     default:
       return state

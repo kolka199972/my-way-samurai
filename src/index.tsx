@@ -6,16 +6,16 @@ import App from './App'
 import {BrowserRouter} from 'react-router-dom'
 import {IState} from './models'
 import './index.css'
-import StoreContext from './storeContext'
+import {Provider} from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 const rerenderDOM = (state: IState) => {
   root.render(
     <BrowserRouter>
-      <StoreContext.Provider value={store}>
+      <Provider store={store}>
         <App />
-      </StoreContext.Provider>
+      </Provider>
     </BrowserRouter>
   )
 }

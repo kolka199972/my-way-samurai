@@ -1,70 +1,15 @@
+import axios from 'axios'
 import React from 'react'
 import s from './Users.module.css'
+import userPhotoUrl from '../../assets/img/user.png'
 
 const Users = ({users, onFollow, onUnfollow, onSetUsers}) => {
   if (users.length === 0) {
-    onSetUsers([
-      {
-        id: 1,
-        followed: true,
-        photoUrl:
-          'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-        fullName: 'Kirill',
-        status: 'I am the best!',
-        location: {
-          country: 'Belarus',
-          city: 'Minsk'
-        }
-      },
-      {
-        id: 2,
-        followed: true,
-        photoUrl:
-          'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-        fullName: 'Rostik',
-        status: 'I like money!',
-        location: {
-          country: 'Belarus',
-          city: 'Minsk'
-        }
-      },
-      {
-        id: 3,
-        followed: false,
-        photoUrl:
-          'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-        fullName: 'Ruslan',
-        status: 'I am not the best!',
-        location: {
-          country: 'Belarus',
-          city: 'Minsk'
-        }
-      },
-      {
-        id: 4,
-        followed: true,
-        photoUrl:
-          'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-        fullName: 'Dmitriy',
-        status: 'I am boss!',
-        location: {
-          country: 'Russia',
-          city: 'Moscow'
-        }
-      },
-      {
-        id: 5,
-        followed: false,
-        photoUrl:
-          'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-        fullName: 'Maks',
-        status: 'I search the justice!',
-        location: {
-          country: 'Ukraine',
-          city: 'Kiev'
-        }
-      }
-    ])
+    axios
+      .get('https://social-network.samuraijs.com/api/1.0/users')
+      .then((response) => {
+        onSetUsers(response.data.items)
+      })
   }
 
   return (
@@ -73,7 +18,11 @@ const Users = ({users, onFollow, onUnfollow, onSetUsers}) => {
         <div key={u.id}>
           <span>
             <div>
-              <img className={s.photo} src={u.photoUrl} alt='ava' />
+              <img
+                className={s.photo}
+                src={u.photoUrl ? u.photoUrl : userPhotoUrl}
+                alt='ava'
+              />
             </div>
             <div>
               {u.followed ? (
@@ -85,12 +34,12 @@ const Users = ({users, onFollow, onUnfollow, onSetUsers}) => {
           </span>
           <span>
             <span>
-              <div>{u.fullName}</div>
+              <div>{u.name}</div>
               <div>{u.status}</div>
             </span>
             <span>
-              <div>{u.location.country}</div>
-              <div>{u.location.city}</div>
+              <div>{'u.location.country'}</div>
+              <div>{'u.location.city'}</div>
             </span>
           </span>
         </div>

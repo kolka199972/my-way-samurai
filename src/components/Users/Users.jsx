@@ -4,16 +4,19 @@ import s from './Users.module.css'
 import userPhotoUrl from '../../assets/img/user.png'
 
 const Users = ({users, onFollow, onUnfollow, onSetUsers}) => {
-  if (users.length === 0) {
-    axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
-      .then((response) => {
-        onSetUsers(response.data.items)
-      })
+  const getUsers = () => {
+    if (users.length === 0) {
+      axios
+        .get('https://social-network.samuraijs.com/api/1.0/users')
+        .then((response) => {
+          onSetUsers(response.data.items)
+        })
+    }
   }
 
   return (
     <>
+      <button onClick={getUsers}>Get Users</button>
       {users.map((u) => (
         <div key={u.id}>
           <span>

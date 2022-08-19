@@ -1,9 +1,6 @@
 import {connect} from 'react-redux'
 import {IState} from '../../models'
-import {
-  addMessageCreator,
-  updateNewMessageTextCreator
-} from '../../redux/dialogsReducer'
+import {addMessageAC, updateNewMessageTextAC} from '../../redux/dialogsReducer'
 import Dialogs from './Dialogs'
 
 const mapStateToProps = (state: IState) => {
@@ -17,10 +14,10 @@ const mapStateToProps = (state: IState) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onCreateMessage: () => {
-      dispatch(addMessageCreator())
+      dispatch(addMessageAC())
     },
     onUpdateText: (text: string) => {
-      dispatch(updateNewMessageTextCreator(text))
+      dispatch(updateNewMessageTextAC(text))
     }
   }
 }

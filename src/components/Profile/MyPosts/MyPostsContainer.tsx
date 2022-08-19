@@ -1,9 +1,6 @@
 import {connect} from 'react-redux'
 import {IState} from '../../../models'
-import {
-  addPostCreator,
-  updateNewPostTextCreator
-} from '../../../redux/profileReducer'
+import {addPostAC, updateNewPostTextAC} from '../../../redux/profileReducer'
 import MyPosts from './MyPosts'
 
 const mapStateToProps = (state: IState) => {
@@ -16,10 +13,10 @@ const mapStateToProps = (state: IState) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onUpdateNewPostText: (text: string) => {
-      dispatch(updateNewPostTextCreator(text))
+      dispatch(updateNewPostTextAC(text))
     },
     onCreateNewPost: () => {
-      dispatch(addPostCreator())
+      dispatch(addPostAC())
     }
   }
 }

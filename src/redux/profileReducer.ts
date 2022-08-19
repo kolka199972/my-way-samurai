@@ -44,10 +44,10 @@ const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
 
 export default profileReducer
 
-export function addPostCreator() {
+export function addPostAC() {
   return {type: ADD_POST}
 }
 
-export function updateNewPostTextCreator(text: string) {
+export function updateNewPostTextAC(text: string) {
   return {type: UPDATE_NEW_POST_TEXT, newText: text}
 }

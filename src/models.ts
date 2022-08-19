@@ -33,6 +33,9 @@ export interface IUser {
 
 export interface IUsersPage {
   users: IUser[]
+  currentPage: number
+  pageSize: number
+  totalUsersCount: number
 }
 
 export interface IProfilePage {
@@ -90,6 +93,16 @@ export type IActionSetUsers = {
   users: IUser[]
 }
 
+export type IActionSetCurrentPage = {
+  type: 'SET_CURRENT_PAGE'
+  currentPage: number
+}
+
+export type IActionSetTotalUsersCount = {
+  type: 'SET_TOTAL_USERS_COUNT'
+  totalUsersCount: number
+}
+
 export type IAction =
   | IActionAddPost
   | IActionUpdateNewPostText
@@ -98,6 +111,8 @@ export type IAction =
   | IACtionFollow
   | IACtionUnfollow
   | IActionSetUsers
+  | IActionSetCurrentPage
+  | IActionSetTotalUsersCount
 
 export interface IStore {
   _state: IState

@@ -6,21 +6,48 @@ import userPhotoUrl from '../../assets/img/user.png'
 class Users extends React.Component {
   componentDidMount() {
     axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
+      )
+      .then((response) => {
+        this.props.onSetUsers(response.data.items)
+        this.props.onSetTotalUsersCount(response.data.totalCount)
+      })
+  }
+
+  setCurrentPage = (pageNumber) => {
+    this.props.onSetCurrentPage(pageNumber)
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`
+      )
       .then((response) => {
         this.props.onSetUsers(response.data.items)
       })
   }
 
   render() {
+    let pagesNumber = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    )
+    let pages = []
+    for (let i = 1; i <= pagesNumber && i < 10; i++) {
+      pages.push(i)
+    }
+
     return (
       <>
+        {pages.map((p) => (
+          <span key={p} onClick={() => this.setCurrentPage(p)}>
+            {' ' + p}
+          </span>
+        ))}
         {this.props.users.map((u) => (
           <div key={u.id}>
             <span>
               <div>
                 <img
-                  className={s.photo}
+                  className={s.userPhoto}
                   src={u.photoUrl ? u.photoUrl : userPhotoUrl}
                   alt='ava'
                 />

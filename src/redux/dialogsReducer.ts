@@ -51,10 +51,10 @@ const dialogsReducer: (state: IDialogsPage, action: IAction) => IDialogsPage = (
 
 export default dialogsReducer
 
-export function addMessageCreator() {
+export function addMessageAC() {
   return {type: ADD_MESSAGE}
 }
 
-export function updateNewMessageTextCreator(text: string) {
+export function updateNewMessageTextAC(text: string) {
   return {type: UPDATE_NEW_MESSAGE_TEXT, newText: text}
 }

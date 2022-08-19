@@ -36,6 +36,7 @@ export interface IUsersPage {
   currentPage: number
   pageSize: number
   totalUsersCount: number
+  isFetching: boolean
 }
 
 export interface IProfilePage {
@@ -103,6 +104,11 @@ export type IActionSetTotalUsersCount = {
   totalUsersCount: number
 }
 
+export type IActionToggleIsFetchin = {
+  type: 'TOGGLE_IS_FETCHING'
+  isFetching: boolean
+}
+
 export type IAction =
   | IActionAddPost
   | IActionUpdateNewPostText
@@ -113,6 +119,7 @@ export type IAction =
   | IActionSetUsers
   | IActionSetCurrentPage
   | IActionSetTotalUsersCount
+  | IActionToggleIsFetchin
 
 export interface IStore {
   _state: IState

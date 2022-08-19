@@ -41,7 +41,8 @@ const store: IStore = {
       users: [],
       totalUsersCount: 0,
       pageSize: 0,
-      currentPage: 1
+      currentPage: 1,
+      isFetching: false
     }
   },
   _callObserver() {},

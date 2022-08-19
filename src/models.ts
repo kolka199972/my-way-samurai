@@ -23,7 +23,7 @@ export interface IUser {
   id: number
   followed: boolean
   photoUrl: string
-  fullName: string
+  name: string
   status: string
   location: {
     country: string

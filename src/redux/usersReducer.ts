@@ -76,27 +76,27 @@ const usersReducer: (state: IUsersPage, action: IAction) => IUsersPage = (
   }
 }
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
   return {type: FOLLOW, userId}
 }
 
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
   return {type: UNFOLLOW, userId}
 }
 
-export const setUsersAC = (users: IUser[]) => {
+export const setUsers = (users: IUser[]) => {
   return {type: SET_USERS, users}
 }
 
-export const setCurrentPageAC = (pageNumber: number) => {
+export const setCurrentPage = (pageNumber: number) => {
   return {type: SET_CURRENT_PAGE, currentPage: pageNumber}
 }
 
-export const setTotalUsersCountAC = (usersCount: number) => {
+export const setTotalUsersCount = (usersCount: number) => {
   return {type: SET_TOTAL_USERS_COUNT, totalUsersCount: usersCount}
 }
 
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
   return {type: TOGGLE_IS_FETCHING, isFetching}
 }
 

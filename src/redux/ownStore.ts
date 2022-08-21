@@ -12,7 +12,19 @@ const store: IStore = {
         {id: 3, message: 'Visual Studio Code', likesCount: 24},
         {id: 4, message: 'WebStorm', likesCount: 42}
       ],
-      newPostText: ''
+      newPostText: '',
+      profile: {
+        aboutMe: '',
+        contacts: {},
+        fullName: '',
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        photos: {
+          large: '',
+          small: ''
+        },
+        userId: Date.now()
+      }
     },
     dialogsPage: {
       dialogs: [

@@ -1,8 +1,9 @@
-import {IProfilePage} from './../models'
+import {IProfilePage, IProfileUser} from './../models'
 import {IAction} from '../models'
 
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 const initialState = {
   posts: [
@@ -11,7 +12,19 @@ const initialState = {
     {id: 3, message: 'Visual Studio Code', likesCount: 24},
     {id: 4, message: 'WebStorm', likesCount: 42}
   ],
-  newPostText: ''
+  newPostText: '',
+  profile: {
+    aboutMe: '',
+    contacts: {},
+    fullName: '',
+    lookingForAJob: false,
+    lookingForAJobDescription: '',
+    photos: {
+      large: '',
+      small: ''
+    },
+    userId: Date.now()
+  }
 }
 
 const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
@@ -37,6 +50,12 @@ const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
         newPostText: action.newText
       }
 
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.profile
+      }
+
     default:
       return state
   }
@@ -50,4 +69,8 @@ export function addPostAC() {
 
 export function updateNewPostTextAC(text: string) {
   return {type: UPDATE_NEW_POST_TEXT, newText: text}
+}
+
+export function setUserProfile(user: IProfileUser) {
+  return {type: SET_USER_PROFILE, profile: user}
 }

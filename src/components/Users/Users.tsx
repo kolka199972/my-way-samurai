@@ -2,6 +2,7 @@ import React from 'react'
 import s from './Users.module.css'
 import userPhotoUrl from '../../assets/img/user.png'
 import {IUser} from '../../models'
+import {Link} from 'react-router-dom'
 
 interface UsersProps {
   onSetCurrentPage: (pageNumber: number) => void
@@ -43,11 +44,13 @@ const Users = ({
         <div key={u.id}>
           <span>
             <div>
-              <img
-                className={s.userPhoto}
-                src={u.photoUrl ? u.photoUrl : userPhotoUrl}
-                alt='ava'
-              />
+              <Link to={'/profile/' + u.id}>
+                <img
+                  className={s.userPhoto}
+                  src={u.photoUrl ? u.photoUrl : userPhotoUrl}
+                  alt='ava'
+                />
+              </Link>
             </div>
             <div>
               {u.followed ? (

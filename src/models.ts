@@ -31,6 +31,19 @@ export interface IUser {
   }
 }
 
+export interface IProfileUser {
+  aboutMe: string
+  contacts: object
+  fullName: string
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+  photos: {
+    large: string
+    small: string
+  }
+  userId: number
+}
+
 export interface IUsersPage {
   users: IUser[]
   currentPage: number
@@ -42,6 +55,7 @@ export interface IUsersPage {
 export interface IProfilePage {
   posts: IPost[]
   newPostText: string
+  profile: IProfileUser
 }
 
 export interface IDialogsPage {
@@ -109,6 +123,11 @@ export type IActionToggleIsFetchin = {
   isFetching: boolean
 }
 
+export type IActionSetUserProfile = {
+  type: 'SET_USER_PROFILE'
+  profile: IProfileUser
+}
+
 export type IAction =
   | IActionAddPost
   | IActionUpdateNewPostText
@@ -120,6 +139,7 @@ export type IAction =
   | IActionSetCurrentPage
   | IActionSetTotalUsersCount
   | IActionToggleIsFetchin
+  | IActionSetUserProfile
 
 export interface IStore {
   _state: IState

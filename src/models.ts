@@ -68,11 +68,25 @@ export interface ISidebar {
   friends: IFriend[]
 }
 
+export interface IAuth {
+  userId: number
+  email: string
+  login: string
+  isAuth: boolean
+}
+
+export interface IAuthData {
+  userId: number
+  login: string
+  email: string
+}
+
 export interface IState {
   profilePage: IProfilePage
   dialogsPage: IDialogsPage
   sidebar: ISidebar
   usersPage: IUsersPage
+  auth: IAuth
 }
 
 export type IActionAddPost = {
@@ -128,6 +142,11 @@ export type IActionSetUserProfile = {
   profile: IProfileUser
 }
 
+export type IActionSetAuthUserData = {
+  type: 'SET_AUTH_USER_DATA'
+  data: IAuthData
+}
+
 export type IAction =
   | IActionAddPost
   | IActionUpdateNewPostText
@@ -140,6 +159,7 @@ export type IAction =
   | IActionSetTotalUsersCount
   | IActionToggleIsFetchin
   | IActionSetUserProfile
+  | IActionSetAuthUserData
 
 export interface IStore {
   _state: IState

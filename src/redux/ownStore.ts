@@ -55,6 +55,12 @@ const store: IStore = {
       pageSize: 0,
       currentPage: 1,
       isFetching: false
+    },
+    auth: {
+      userId: 0,
+      email: '',
+      login: '',
+      isAuth: false
     }
   },
   _callObserver() {},

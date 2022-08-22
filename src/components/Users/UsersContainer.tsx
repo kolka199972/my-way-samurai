@@ -32,7 +32,8 @@ class UsersContainer extends React.Component<UsersContainerProps, {}> {
     this.props.toggleIsFetching(true)
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,
+        {withCredentials: true}
       )
       .then((response) => {
         this.props.toggleIsFetching(false)
@@ -46,7 +47,8 @@ class UsersContainer extends React.Component<UsersContainerProps, {}> {
     this.props.toggleIsFetching(true)
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`,
+        {withCredentials: true}
       )
       .then((response) => {
         this.props.toggleIsFetching(false)

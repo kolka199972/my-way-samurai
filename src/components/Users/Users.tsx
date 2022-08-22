@@ -3,6 +3,7 @@ import s from './Users.module.css'
 import userPhotoUrl from '../../assets/img/user.png'
 import {IUser} from '../../models'
 import {Link} from 'react-router-dom'
+// import axios from 'axios'
 
 interface UsersProps {
   onSetCurrentPage: (pageNumber: number) => void
@@ -54,9 +55,52 @@ const Users = ({
             </div>
             <div>
               {u.followed ? (
-                <button onClick={() => onUnfollow(u.id)}>Unfollow</button>
+                <button
+                  onClick={() => {
+                    // axios
+                    //   .delete(
+                    //     `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                    //     {
+                    //       withCredentials: true,
+                    //       headers: {
+                    //         'API-KEY': 'bi775b2f-c3a5-4509-8dc9-90b5629de7c3'
+                    //       }
+                    //     }
+                    //   )
+                    //   .then((response) => {
+                    //     if (response.data.resultCode === 0) {
+                    //       onUnfollow(u.id)
+                    //     }
+                    //   })
+                    onUnfollow(u.id)
+                  }}
+                >
+                  Unfollow
+                </button>
               ) : (
-                <button onClick={() => onFollow(u.id)}>Follow</button>
+                <button
+                  onClick={() => {
+                    // axios
+                    //   .post(
+                    //     `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                    //     {},
+                    //     {
+                    //       withCredentials: true,
+                    //       headers: {
+                    //         'API-KEY': 'bi775b2f-c3a5-4509-8dc9-90b5629de7c3'
+                    //       }
+                    //     }
+                    //   )
+                    //   .then((response) => {
+                    //     if (response.data.resultCode === 0) {
+                    //       onFollow(u.id)
+                    //     }
+                    //   })
+                    onFollow(u.id)
+                  }}
+                >
+                  Follow
+                </button>
               )}
             </div>
           </span>

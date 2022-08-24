@@ -50,6 +50,7 @@ export interface IUsersPage {
   pageSize: number
   totalUsersCount: number
   isFetching: boolean
+  followingInProgress: Array<number>
 }
 
 export interface IProfilePage {
@@ -147,6 +148,12 @@ export type IActionSetAuthUserData = {
   data: IAuthData
 }
 
+export type IActionToggleFollowingInProgress = {
+  type: 'TOGGLE_FOLLOWING_IN_PROGRESS'
+  followingInProgress: boolean
+  userId: number
+}
+
 export type IAction =
   | IActionAddPost
   | IActionUpdateNewPostText
@@ -160,6 +167,7 @@ export type IAction =
   | IActionToggleIsFetchin
   | IActionSetUserProfile
   | IActionSetAuthUserData
+  | IActionToggleFollowingInProgress
 
 export interface IStore {
   _state: IState

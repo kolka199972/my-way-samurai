@@ -54,7 +54,8 @@ const store: IStore = {
       totalUsersCount: 0,
       pageSize: 0,
       currentPage: 1,
-      isFetching: false
+      isFetching: false,
+      followingInProgress: []
     },
     auth: {
       userId: 0,

@@ -13,6 +13,11 @@ interface UsersProps {
   pageSize: number
   currentPage: number
   users: IUser[]
+  followingInProgress: Array<number>
+  toggleFollowingInProgress: (
+    followingInProgres: boolean,
+    userId: number
+  ) => void
 }
 
 const Users = ({
@@ -22,7 +27,9 @@ const Users = ({
   users,
   onFollow,
   onUnfollow,
-  onSetCurrentPage
+  onSetCurrentPage,
+  followingInProgress,
+  toggleFollowingInProgress
 }: UsersProps) => {
   let pagesNumber = Math.ceil(totalUsersCount / pageSize)
   let pages = []
@@ -56,24 +63,30 @@ const Users = ({
             <div>
               {u.followed ? (
                 <button
+                  disabled={followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
+                    toggleFollowingInProgress(true, u.id)
                     userAPI.unfollowUser(u.id).then((data) => {
                       if (data.resultCode === 0) {
                         onUnfollow(u.id)
                       }
                     })
+                    toggleFollowingInProgress(false, u.id)
                   }}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
+                  disabled={followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
+                    toggleFollowingInProgress(true, u.id)
                     userAPI.followUser(u.id).then((data) => {
                       if (data.resultCode === 0) {
                         onFollow(u.id)
                       }
                     })
+                    toggleFollowingInProgress(false, u.id)
                   }}
                 >
                   Follow

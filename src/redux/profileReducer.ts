@@ -1,5 +1,6 @@
 import {IProfilePage, IProfileUser} from './../models'
 import {IAction} from '../models'
+import {userAPI} from '../api/api'
 
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
@@ -61,8 +62,6 @@ const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
   }
 }
 
-export default profileReducer
-
 export function addPostAC() {
   return {type: ADD_POST}
 }
@@ -74,3 +73,13 @@ export function updateNewPostTextAC(text: string) {
 export function setUserProfile(user: IProfileUser) {
   return {type: SET_USER_PROFILE, profile: user}
 }
+
+export const setUser = (userId: number) => {
+  return (dispatch: any) => {
+    userAPI.getUserProfile(userId).then((data) => {
+      dispatch(setUserProfile(data))
+    })
+  }
+}
+
+export default profileReducer

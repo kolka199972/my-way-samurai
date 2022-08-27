@@ -3,7 +3,6 @@ import s from './Users.module.css'
 import userPhotoUrl from '../../assets/img/user.png'
 import {IUser} from '../../models'
 import {Link} from 'react-router-dom'
-import {userAPI} from '../../api/api'
 
 interface UsersProps {
   onSetCurrentPage: (pageNumber: number) => void
@@ -14,10 +13,6 @@ interface UsersProps {
   currentPage: number
   users: IUser[]
   followingInProgress: Array<number>
-  toggleFollowingInProgress: (
-    followingInProgres: boolean,
-    userId: number
-  ) => void
 }
 
 const Users = ({
@@ -28,8 +23,7 @@ const Users = ({
   onFollow,
   onUnfollow,
   onSetCurrentPage,
-  followingInProgress,
-  toggleFollowingInProgress
+  followingInProgress
 }: UsersProps) => {
   let pagesNumber = Math.ceil(totalUsersCount / pageSize)
   let pages = []
@@ -64,30 +58,14 @@ const Users = ({
               {u.followed ? (
                 <button
                   disabled={followingInProgress.some((id) => id === u.id)}
-                  onClick={() => {
-                    toggleFollowingInProgress(true, u.id)
-                    userAPI.unfollowUser(u.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        onUnfollow(u.id)
-                      }
-                    })
-                    toggleFollowingInProgress(false, u.id)
-                  }}
+                  onClick={() => onUnfollow(u.id)}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
                   disabled={followingInProgress.some((id) => id === u.id)}
-                  onClick={() => {
-                    toggleFollowingInProgress(true, u.id)
-                    userAPI.followUser(u.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        onFollow(u.id)
-                      }
-                    })
-                    toggleFollowingInProgress(false, u.id)
-                  }}
+                  onClick={() => onFollow(u.id)}
                 >
                   Follow
                 </button>

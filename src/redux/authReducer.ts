@@ -1,3 +1,4 @@
+import {userAPI} from '../api/api'
 import {IAction, IAuth, IAuthData} from '../models'
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
@@ -28,6 +29,15 @@ const authReducer: (state: IAuth, action: IAction) => IAuth = (
 
 export const setAuthUserData = ({userId, email, login}: IAuthData) => {
   return {type: SET_AUTH_USER_DATA, data: {userId, email, login}}
+}
+
+export const setAuthUser = () => {
+  return (dispatch: any) => {
+    userAPI.getAuthUser().then((data) => {
+      const {id, email, login} = data.data
+      dispatch(setAuthUserData({userId: id, email, login}))
+    })
+  }
 }
 
 export default authReducer

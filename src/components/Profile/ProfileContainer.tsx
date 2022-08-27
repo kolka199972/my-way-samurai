@@ -1,13 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
-import {userAPI} from '../../api/api'
 import {IProfileUser, IState} from '../../models'
-import {setUserProfile} from '../../redux/profileReducer'
+import {setUser} from '../../redux/profileReducer'
 import Profile from './Profile'
 
 interface ProfileContainerProps {
-  setUserProfile: (user: IProfileUser) => void
+  setUser: (userId: number) => void
   profile: IProfileUser
   router: any
 }
@@ -18,9 +17,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
     if (!userId) {
       userId = 2
     }
-    userAPI.getUserProfile(userId).then((data) => {
-      this.props.setUserProfile(data)
-    })
+    this.props.setUser(userId)
   }
   render() {
     return <Profile {...this.props} profile={this.props.profile} />
@@ -34,7 +31,7 @@ const mapStateToProps = (state: IState) => {
 }
 
 const mapDispatchObjectToProps = {
-  setUserProfile
+  setUser
 }
 
 export default connect(

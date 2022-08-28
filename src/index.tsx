@@ -5,8 +5,8 @@ import store from './redux/store'
 import App from './App'
 import {BrowserRouter} from 'react-router-dom'
 import {IState} from './models'
-import './index.css'
 import {Provider} from 'react-redux'
+import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 

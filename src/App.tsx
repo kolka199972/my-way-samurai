@@ -1,6 +1,5 @@
 import React from 'react'
 import {Route, Routes} from 'react-router-dom'
-import './App.css'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
@@ -10,6 +9,7 @@ import News from './components/News/News'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import Settings from './components/Settings/Settings'
 import UsersContainer from './components/Users/UsersContainer'
+import './App.css'
 
 const App = () => {
   return (

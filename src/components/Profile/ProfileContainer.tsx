@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
 import {compose} from 'redux'
-// import { withAuthReducer } from '../../hoc/withAuthRedirect'
 import {IProfileUser, IState} from '../../models'
 import {getUserProfile} from '../../redux/profileReducer'
 import Profile from './Profile'
+// import { withAuthReducer } from '../../hoc/withAuthRedirect'
 
 interface ProfileContainerProps {
   getUserProfile: (userId: number) => void

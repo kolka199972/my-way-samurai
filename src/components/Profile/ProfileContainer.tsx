@@ -8,6 +8,7 @@ import Profile from './Profile'
 interface ProfileContainerProps {
   getUserProfile: (userId: number) => void
   profile: IProfileUser
+  isAuth: boolean
   router: any
 }
 
@@ -20,13 +21,15 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
     this.props.getUserProfile(userId)
   }
   render() {
+    // if (!this.props.isAuth) return <Navigate to='/login' />
     return <Profile {...this.props} profile={this.props.profile} />
   }
 }
 
 const mapStateToProps = (state: IState) => {
   return {
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
   }
 }
 

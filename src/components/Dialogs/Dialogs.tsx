@@ -1,5 +1,4 @@
 import React, {RefObject} from 'react'
-// import {Navigate} from 'react-router-dom'
 import {IDialog, IMessage} from '../../models'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
@@ -9,7 +8,6 @@ interface DialogsProps {
   dialogs: IDialog[]
   messages: IMessage[]
   newMessageText: string
-  isAuth: boolean
   onCreateMessage: () => void
   onUpdateText: (text: string) => void
 }
@@ -18,7 +16,6 @@ const Dialogs = ({
   dialogs,
   messages,
   newMessageText,
-  isAuth,
   onCreateMessage,
   onUpdateText
 }: DialogsProps) => {
@@ -38,8 +35,6 @@ const Dialogs = ({
   const messagesElements = messages.map((m) => (
     <Message key={m.id} message={m.message} />
   ))
-
-  // if (!isAuth) return <Navigate to='/login' />
 
   return (
     <div className={s.dialogs}>

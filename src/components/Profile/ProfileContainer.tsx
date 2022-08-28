@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
+// import { withAuthReducer } from '../../hoc/withAuthRedirect'
 import {IProfileUser, IState} from '../../models'
 import {getUserProfile} from '../../redux/profileReducer'
 import Profile from './Profile'
@@ -8,7 +9,6 @@ import Profile from './Profile'
 interface ProfileContainerProps {
   getUserProfile: (userId: number) => void
   profile: IProfileUser
-  isAuth: boolean
   router: any
 }
 
@@ -21,15 +21,13 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
     this.props.getUserProfile(userId)
   }
   render() {
-    // if (!this.props.isAuth) return <Navigate to='/login' />
     return <Profile {...this.props} profile={this.props.profile} />
   }
 }
 
 const mapStateToProps = (state: IState) => {
   return {
-    profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    profile: state.profilePage.profile
   }
 }
 

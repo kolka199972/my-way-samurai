@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
+import {compose} from 'redux'
 // import { withAuthReducer } from '../../hoc/withAuthRedirect'
 import {IProfileUser, IState} from '../../models'
 import {getUserProfile} from '../../redux/profileReducer'
@@ -35,10 +36,11 @@ const mapDispatchObjectToProps = {
   getUserProfile
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchObjectToProps
-)(withRouter(ProfileContainer))
+export default compose(
+  withRouter,
+  // withAuthReducer
+  connect(mapStateToProps, mapDispatchObjectToProps)
+)(ProfileContainer)
 
 function withRouter(Component: any) {
   function ComponentWithRouterProp(props: any) {

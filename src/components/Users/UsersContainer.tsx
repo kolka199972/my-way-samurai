@@ -9,6 +9,8 @@ import {
 import React from 'react'
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
+import {compose} from 'redux'
+// import { withAuthReducer } from '../../hoc/withAuthRedirect'
 
 interface UsersContainerProps {
   setCurrentPage: (pageNumber: number) => void
@@ -70,7 +72,7 @@ const mapDispatchObjectToProps = {
   getUsers
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchObjectToProps
+export default compose(
+  // withAuthReducer
+  connect(mapStateToProps, mapDispatchObjectToProps)
 )(UsersContainer)

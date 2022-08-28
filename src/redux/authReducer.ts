@@ -1,4 +1,4 @@
-import {userAPI} from '../api/api'
+import {authAPI} from '../api/api'
 import {IAction, IAuth, IAuthData} from '../models'
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
@@ -33,7 +33,7 @@ export const setAuthUserData = ({userId, email, login}: IAuthData) => {
 
 export const setAuthUser = () => {
   return (dispatch: any) => {
-    userAPI.getAuthUser().then((data) => {
+    authAPI.me().then((data) => {
       const {id, email, login} = data.data
       dispatch(setAuthUserData({userId: id, email, login}))
     })

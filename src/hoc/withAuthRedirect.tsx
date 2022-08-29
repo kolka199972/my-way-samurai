@@ -1,5 +1,5 @@
 import {Navigate} from 'react-router-dom'
-import React from 'react'
+import React, {ClassicComponentClass} from 'react'
 import {connect} from 'react-redux'
 import {IState} from '../models'
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state: IState) => {
   }
 }
 
-export const withAuthReducer = (Component: any) => {
+export const withAuthReducer = (Component: ClassicComponentClass) => {
   class RedirectComponent extends React.Component<{
     isAuth: boolean
   }> {

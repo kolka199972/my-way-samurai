@@ -1,10 +1,11 @@
 import {IProfilePage, IProfileUser} from './../models'
 import {IAction} from '../models'
-import {userAPI} from '../api/api'
+import {profileAPI} from '../api/api'
 
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 const initialState = {
   posts: [
@@ -25,7 +26,8 @@ const initialState = {
       small: ''
     },
     userId: Date.now()
-  }
+  },
+  status: ''
 }
 
 const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
@@ -57,6 +59,12 @@ const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
         profile: action.profile
       }
 
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.status
+      }
+
     default:
       return state
   }
@@ -74,10 +82,32 @@ export function setUserProfile(user: IProfileUser) {
   return {type: SET_USER_PROFILE, profile: user}
 }
 
+export function setStatus(status: string) {
+  return {type: SET_STATUS, status}
+}
+
 export const getUserProfile = (userId: number) => {
   return (dispatch: any) => {
-    userAPI.getUserProfile(userId).then((data) => {
+    profileAPI.getUserProfile(userId).then((data) => {
       dispatch(setUserProfile(data))
+    })
+  }
+}
+
+export const getUserStatus = (userId: number) => {
+  return (dispatch: any) => {
+    profileAPI.getUserStatus(userId).then((data) => {
+      dispatch(setStatus(data))
+    })
+  }
+}
+
+export const setUserStatus = (status: string) => {
+  return (dispatch: any) => {
+    profileAPI.setUserStatus(status).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setStatus(status))
+      }
     })
   }
 }

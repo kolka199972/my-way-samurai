@@ -3,12 +3,19 @@ import {connect} from 'react-redux'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
 import {compose} from 'redux'
 import {IProfileUser, IState} from '../../models'
-import {getUserProfile} from '../../redux/profileReducer'
+import {
+  getUserProfile,
+  getUserStatus,
+  setUserStatus
+} from '../../redux/profileReducer'
 import Profile from './Profile'
 // import { withAuthReducer } from '../../hoc/withAuthRedirect'
 
 interface ProfileContainerProps {
   getUserProfile: (userId: number) => void
+  getUserStatus: (id: number) => void
+  setUserStatus: (status: string) => void
+  status: string
   profile: IProfileUser
   router: any
 }
@@ -20,6 +27,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
       userId = 2
     }
     this.props.getUserProfile(userId)
+    this.props.getUserStatus(userId)
   }
   render() {
     return <Profile {...this.props} profile={this.props.profile} />
@@ -28,12 +36,15 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
 
 const mapStateToProps = (state: IState) => {
   return {
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    status: state.profilePage.status
   }
 }
 
 const mapDispatchObjectToProps = {
-  getUserProfile
+  getUserProfile,
+  setUserStatus,
+  getUserStatus
 }
 
 export default compose(

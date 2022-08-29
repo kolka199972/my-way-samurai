@@ -6,15 +6,17 @@ import ProfileStatus from './ProfileStatus'
 
 interface ProfileInfoProps {
   profile: IProfileUser
+  status: string
+  setUserStatus: (status: string) => void
 }
 
-const ProfileInfo = ({profile}: ProfileInfoProps) => {
+const ProfileInfo = ({profile, status, setUserStatus}: ProfileInfoProps) => {
   if (!profile) return <Preloader />
   return (
     <div>
       <div className={s.descriptionBlock}>
         <img src={profile.photos.large} alt='ava' />
-        <ProfileStatus status='I am the best!' />
+        <ProfileStatus status={status} setUserStatus={setUserStatus} />
       </div>
     </div>
   )

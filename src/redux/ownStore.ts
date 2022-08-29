@@ -24,7 +24,8 @@ const store: IStore = {
           small: ''
         },
         userId: Date.now()
-      }
+      },
+      status: ''
     },
     dialogsPage: {
       dialogs: [

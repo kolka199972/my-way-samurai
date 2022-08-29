@@ -57,6 +57,7 @@ export interface IProfilePage {
   posts: IPost[]
   newPostText: string
   profile: IProfileUser
+  status: string
 }
 
 export interface IDialogsPage {
@@ -154,6 +155,11 @@ export type IActionToggleFollowingInProgress = {
   userId: number
 }
 
+export type IActionSetStatus = {
+  type: 'SET_STATUS'
+  status: string
+}
+
 export type IAction =
   | IActionAddPost
   | IActionUpdateNewPostText
@@ -168,6 +174,7 @@ export type IAction =
   | IActionSetUserProfile
   | IActionSetAuthUserData
   | IActionToggleFollowingInProgress
+  | IActionSetStatus
 
 export interface IStore {
   _state: IState

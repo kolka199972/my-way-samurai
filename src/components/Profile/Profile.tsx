@@ -6,12 +6,18 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 interface ProfileProps {
   profile: IProfileUser
+  status: string
+  setUserStatus: (status: string) => void
 }
 
-const Profile = ({profile}: ProfileProps) => {
+const Profile = ({profile, status, setUserStatus}: ProfileProps) => {
   return (
     <div>
-      <ProfileInfo profile={profile} />
+      <ProfileInfo
+        profile={profile}
+        status={status}
+        setUserStatus={setUserStatus}
+      />
       <MyPostsContainer />
     </div>
   )

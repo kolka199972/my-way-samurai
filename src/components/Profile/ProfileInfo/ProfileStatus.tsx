@@ -11,6 +11,12 @@ class ProfileStatus extends React.Component<ProfileStatusProps> {
     status: this.props.status
   }
 
+  componentDidUpdate(prevProps: {status: string}, prevState: object) {
+    if (prevProps.status !== this.props.status) {
+      this.setState({status: this.props.status})
+    }
+  }
+
   handleInput = ({target}: any) => {
     this.setState({
       status: target.value

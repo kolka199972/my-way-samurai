@@ -12,7 +12,6 @@ const store: IStore = {
         {id: 3, message: 'Visual Studio Code', likesCount: 24},
         {id: 4, message: 'WebStorm', likesCount: 42}
       ],
-      newPostText: '',
       profile: {
         aboutMe: '',
         contacts: {},
@@ -40,8 +39,7 @@ const store: IStore = {
         {id: 2, message: 'I am Lion'},
         {id: 3, message: 'My name'},
         {id: 4, message: 'Yo'}
-      ],
-      newMessageText: ''
+      ]
     },
     sidebar: {
       friends: [

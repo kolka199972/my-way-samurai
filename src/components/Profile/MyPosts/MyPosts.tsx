@@ -1,30 +1,38 @@
-import React, {RefObject} from 'react'
+import React from 'react'
+import {Field, reduxForm} from 'redux-form'
 import {IPost} from '../../../models'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
 interface MyPostsProps {
   posts: IPost[]
-  newPostText: string
-  onCreateNewPost: () => void
-  onUpdateNewPostText: (text: string) => void
+  onCreateNewPost: (newPostText: string) => void
 }
 
-const MyPosts = ({
-  posts,
-  newPostText,
-  onUpdateNewPostText,
-  onCreateNewPost
-}: MyPostsProps) => {
-  const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
+const ProfileNewPostForm = ({handleSubmit}: any) => {
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <Field
+          component={'textarea'}
+          name='newPostText'
+          placeholder='new post text...'
+        />
+      </div>
+      <div>
+        <button>Add post</button>
+      </div>
+    </form>
+  )
+}
 
-  const createNewPost = () => {
-    onCreateNewPost()
-  }
+const ProfileReduxNewPostForm = reduxForm({form: 'ProfileNewPostText'})(
+  ProfileNewPostForm
+)
 
-  const onPostChange = () => {
-    const text = newPostElement.current!.value
-    onUpdateNewPostText(text)
+const MyPosts = ({posts, onCreateNewPost}: MyPostsProps) => {
+  const createNewPost = (values: any) => {
+    onCreateNewPost(values.newPostText)
   }
 
   const postsElements = posts.map((p) => (
@@ -35,16 +43,7 @@ const MyPosts = ({
     <div className={s.postsBlock}>
       <h3>My Posts</h3>
       <div>
-        <div>
-          <textarea
-            onChange={onPostChange}
-            value={newPostText}
-            ref={newPostElement}
-          ></textarea>
-        </div>
-        <div>
-          <button onClick={createNewPost}>Add post</button>
-        </div>
+        <ProfileReduxNewPostForm onSubmit={createNewPost} />
       </div>
       <div className={s.posts}>{postsElements}</div>
     </div>

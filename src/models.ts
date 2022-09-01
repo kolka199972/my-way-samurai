@@ -55,7 +55,6 @@ export interface IUsersPage {
 
 export interface IProfilePage {
   posts: IPost[]
-  newPostText: string
   profile: IProfileUser
   status: string
 }
@@ -63,7 +62,6 @@ export interface IProfilePage {
 export interface IDialogsPage {
   dialogs: IDialog[]
   messages: IMessage[]
-  newMessageText: string
 }
 
 export interface ISidebar {
@@ -93,20 +91,12 @@ export interface IState {
 
 export type IActionAddPost = {
   type: 'ADD_POST'
-}
-
-export type IActionUpdateNewPostText = {
-  type: 'UPDATE_NEW_POST_TEXT'
-  newText: string
+  newPostText: string
 }
 
 export type IActionAddMessage = {
   type: 'ADD_MESSAGE'
-}
-
-export type IActionUpdateNewMessageText = {
-  type: 'UPDATE_NEW_MESSAGE_TEXT'
-  newText: string
+  newMessageText: string
 }
 
 export type IACtionFollow = {
@@ -162,9 +152,7 @@ export type IActionSetStatus = {
 
 export type IAction =
   | IActionAddPost
-  | IActionUpdateNewPostText
   | IActionAddMessage
-  | IActionUpdateNewMessageText
   | IACtionFollow
   | IACtionUnfollow
   | IActionSetUsers

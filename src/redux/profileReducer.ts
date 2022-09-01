@@ -3,7 +3,6 @@ import {IAction} from '../models'
 import {profileAPI} from '../api/api'
 
 const ADD_POST = 'ADD_POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -14,7 +13,6 @@ const initialState = {
     {id: 3, message: 'Visual Studio Code', likesCount: 24},
     {id: 4, message: 'WebStorm', likesCount: 42}
   ],
-  newPostText: '',
   profile: {
     aboutMe: '',
     contacts: {},
@@ -38,19 +36,13 @@ const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
     case ADD_POST:
       const newPost = {
         id: Date.now(),
-        message: state.newPostText,
+        message: action.newPostText,
         likesCount: 42
       }
       return {
         ...state,
         posts: [...state.posts, newPost],
         newPostText: ''
-      }
-
-    case UPDATE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText
       }
 
     case SET_USER_PROFILE:
@@ -70,12 +62,8 @@ const profileReducer: (state: IProfilePage, action: IAction) => IProfilePage = (
   }
 }
 
-export function addPostAC() {
-  return {type: ADD_POST}
-}
-
-export function updateNewPostTextAC(text: string) {
-  return {type: UPDATE_NEW_POST_TEXT, newText: text}
+export function addPostAC(newPostText: string) {
+  return {type: ADD_POST, newPostText}
 }
 
 export function setUserProfile(user: IProfileUser) {

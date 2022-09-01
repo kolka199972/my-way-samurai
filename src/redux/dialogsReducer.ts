@@ -1,7 +1,6 @@
 import {IAction, IDialogsPage} from '../models'
 
 const ADD_MESSAGE = 'ADD_MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 
 const initialState = {
   dialogs: [
@@ -16,8 +15,7 @@ const initialState = {
     {id: 2, message: 'I am Lion'},
     {id: 3, message: 'My name'},
     {id: 4, message: 'Yo'}
-  ],
-  newMessageText: ''
+  ]
 }
 
 const dialogsReducer: (state: IDialogsPage, action: IAction) => IDialogsPage = (
@@ -28,19 +26,12 @@ const dialogsReducer: (state: IDialogsPage, action: IAction) => IDialogsPage = (
     case ADD_MESSAGE: {
       const newMessage = {
         id: Date.now(),
-        message: state.newMessageText
+        message: action.newMessageText
       }
       return {
         ...state,
         messages: [...state.messages, newMessage],
         newMessageText: ''
-      }
-    }
-
-    case UPDATE_NEW_MESSAGE_TEXT: {
-      return {
-        ...state,
-        newMessageText: action.newText
       }
     }
 
@@ -51,10 +42,6 @@ const dialogsReducer: (state: IDialogsPage, action: IAction) => IDialogsPage = (
 
 export default dialogsReducer
 
-export function addMessageAC() {
-  return {type: ADD_MESSAGE}
-}
-
-export function updateNewMessageTextAC(text: string) {
-  return {type: UPDATE_NEW_MESSAGE_TEXT, newText: text}
+export function addMessageAC(newMessageText: string) {
+  return {type: ADD_MESSAGE, newMessageText}
 }

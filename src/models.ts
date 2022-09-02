@@ -82,12 +82,17 @@ export interface IAuthData {
   isAuth: boolean
 }
 
+export interface IApp {
+  initialized: boolean
+}
+
 export interface IState {
   profilePage: IProfilePage
   dialogsPage: IDialogsPage
   sidebar: ISidebar
   usersPage: IUsersPage
   auth: IAuth
+  app: IApp
 }
 
 export type IActionAddPost = {
@@ -151,6 +156,10 @@ export type IActionSetStatus = {
   status: string
 }
 
+export type IActionInitializedSuccess = {
+  type: 'SET_INITIALIZED'
+}
+
 export type IAction =
   | IActionAddPost
   | IActionAddMessage
@@ -164,6 +173,7 @@ export type IAction =
   | IActionSetAuthUserData
   | IActionToggleFollowingInProgress
   | IActionSetStatus
+  | IActionInitializedSuccess
 
 export interface IStore {
   _state: IState

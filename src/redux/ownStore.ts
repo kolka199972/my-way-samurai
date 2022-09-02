@@ -61,6 +61,9 @@ const store: IStore = {
       email: '',
       login: '',
       isAuth: false
+    },
+    app: {
+      initialized: false
     }
   },
   _callObserver() {},

@@ -18,7 +18,6 @@ import {
   getTotalUsersCount,
   getUsers
 } from '../../redux/usersSelectors'
-// import { withAuthReducer } from '../../hoc/withAuthRedirect'
 
 interface UsersContainerProps {
   setCurrentPage: (pageNumber: number) => void
@@ -80,7 +79,6 @@ const mapDispatchObjectToProps = {
   requestUsers
 }
 
-export default compose(
-  // withAuthReducer
-  connect(mapStateToProps, mapDispatchObjectToProps)
-)(UsersContainer)
+export default compose(connect(mapStateToProps, mapDispatchObjectToProps))(
+  UsersContainer
+)

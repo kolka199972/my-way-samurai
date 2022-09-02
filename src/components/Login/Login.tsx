@@ -6,13 +6,14 @@ import {IState} from '../../models'
 import {login} from '../../redux/authReducer'
 import {required} from '../../utils/validators'
 import {Input} from '../common/FormsControl/FormsControl'
-// import s from './Login.module.css'
+import s from './Login.module.css'
 
 interface LoginFormProps {
   handleSubmit: any
+  error: string
 }
 
-const LoginForm = ({handleSubmit}: LoginFormProps) => {
+const LoginForm = ({handleSubmit, error}: LoginFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -42,6 +43,7 @@ const LoginForm = ({handleSubmit}: LoginFormProps) => {
         />{' '}
         remember me
       </div>
+      {error && <div className={s.formSummaryError}>{error}</div>}
       <div>
         <button>Login</button>
       </div>

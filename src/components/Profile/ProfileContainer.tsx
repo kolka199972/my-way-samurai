@@ -18,13 +18,15 @@ interface ProfileContainerProps {
   status: string
   profile: IProfileUser
   router: any
+  isAuth: boolean
+  authorizedUserId: number
 }
 
 class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
   componentDidMount() {
     let userId = this.props.router.params.userId
     if (!userId) {
-      userId = 2
+      userId = this.props.authorizedUserId
     }
     this.props.getUserProfile(userId)
     this.props.getUserStatus(userId)
@@ -37,7 +39,9 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
 const mapStateToProps = (state: IState) => {
   return {
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    isAuth: state.auth.isAuth,
+    authorizedUserId: state.auth.userId
   }
 }
 

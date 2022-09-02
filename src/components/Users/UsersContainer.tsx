@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 import {IState, IUser} from '../../models'
 import {
   follow,
-  getUsers,
+  requestUsers,
   setCurrentPage,
   unfollow
 } from '../../redux/usersReducer'
@@ -10,13 +10,21 @@ import React from 'react'
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
 import {compose} from 'redux'
+import {
+  getCurrentPage,
+  getFollowingInProgress,
+  getIsFetching,
+  getPageSize,
+  getTotalUsersCount,
+  getUsers
+} from '../../redux/usersSelectors'
 // import { withAuthReducer } from '../../hoc/withAuthRedirect'
 
 interface UsersContainerProps {
   setCurrentPage: (pageNumber: number) => void
   unfollow: (id: number) => void
   follow: (id: number) => void
-  getUsers: (pageSize: number, currentPage: number) => void
+  requestUsers: (pageSize: number, currentPage: number) => void
   totalUsersCount: number
   pageSize: number
   currentPage: number
@@ -27,12 +35,12 @@ interface UsersContainerProps {
 
 class UsersContainer extends React.Component<UsersContainerProps, {}> {
   componentDidMount() {
-    this.props.getUsers(this.props.pageSize, this.props.currentPage)
+    this.props.requestUsers(this.props.pageSize, this.props.currentPage)
   }
 
   setCurrentPage = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber)
-    this.props.getUsers(this.props.pageSize, pageNumber)
+    this.props.requestUsers(this.props.pageSize, pageNumber)
   }
 
   render() {
@@ -56,12 +64,12 @@ class UsersContainer extends React.Component<UsersContainerProps, {}> {
 
 const mapStateToProps = (state: IState) => {
   return {
-    users: state.usersPage.users,
-    currentPage: state.usersPage.currentPage,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress
+    users: getUsers(state),
+    currentPage: getCurrentPage(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state)
   }
 }
 
@@ -69,7 +77,7 @@ const mapDispatchObjectToProps = {
   follow,
   unfollow,
   setCurrentPage,
-  getUsers
+  requestUsers
 }
 
 export default compose(

@@ -5,9 +5,10 @@ import s from './Header.module.css'
 
 interface HeaderProps {
   auth: IAuth
+  logout: () => void
 }
 
-const Header = ({auth}: HeaderProps) => {
+const Header = ({auth, logout}: HeaderProps) => {
   return (
     <header className={s.header}>
       <img
@@ -15,7 +16,13 @@ const Header = ({auth}: HeaderProps) => {
         alt='ava'
       ></img>
       <div className={s.loginBlock}>
-        {auth.isAuth ? <p>{auth.login}</p> : <Link to='/login'>Login</Link>}
+        {auth.isAuth ? (
+          <div>
+            {auth.login} - <button onClick={logout}>Log out</button>
+          </div>
+        ) : (
+          <Link to='/login'>Login</Link>
+        )}
       </div>
     </header>
   )

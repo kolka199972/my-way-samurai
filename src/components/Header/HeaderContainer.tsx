@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {IAuth, IState} from '../../models'
-import {setAuthUser} from '../../redux/authReducer'
+import {logout, setAuthUser} from '../../redux/authReducer'
 import Header from './Header'
 
 interface HeaderContainerProps {
   setAuthUser: () => void
   auth: IAuth
+  logout: () => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerProps, {}> {
@@ -15,7 +16,7 @@ class HeaderContainer extends React.Component<HeaderContainerProps, {}> {
   }
 
   render() {
-    return <Header auth={this.props.auth} />
+    return <Header logout={this.props.logout} auth={this.props.auth} />
   }
 }
 
@@ -26,7 +27,8 @@ const mapStateToProps = (state: IState) => {
 }
 
 const mapDispatchObjectToProps = {
-  setAuthUser
+  setAuthUser,
+  logout
 }
 
 export default connect(

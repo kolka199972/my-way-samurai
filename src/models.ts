@@ -79,6 +79,7 @@ export interface IAuthData {
   userId: number
   login: string
   email: string
+  isAuth: boolean
 }
 
 export interface IState {

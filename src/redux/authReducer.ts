@@ -18,8 +18,7 @@ const authReducer: (state: IAuth, action: IAction) => IAuth = (
     case SET_AUTH_USER_DATA:
       return {
         state,
-        ...action.data,
-        isAuth: true
+        ...action.data
       }
 
     default:
@@ -27,8 +26,8 @@ const authReducer: (state: IAuth, action: IAction) => IAuth = (
   }
 }
 
-export const setAuthUserData = ({userId, email, login}: IAuthData) => {
-  return {type: SET_AUTH_USER_DATA, data: {userId, email, login}}
+export const setAuthUserData = ({userId, email, login, isAuth}: IAuthData) => {
+  return {type: SET_AUTH_USER_DATA, data: {userId, email, login, isAuth}}
 }
 
 export const setAuthUser = () => {
@@ -36,7 +35,29 @@ export const setAuthUser = () => {
     authAPI.me().then((data) => {
       if (data.resultCode !== 0) return
       const {id, email, login} = data.data
-      dispatch(setAuthUserData({userId: id, email, login}))
+      dispatch(setAuthUserData({userId: id, email, login, isAuth: true}))
+    })
+  }
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => {
+  return (dispatch: any) => {
+    authAPI.login(email, password, rememberMe).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setAuthUser())
+      }
+    })
+  }
+}
+
+export const logout = () => {
+  return (dispatch: any) => {
+    authAPI.logout().then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(
+          setAuthUserData({userId: 0, email: '', login: '', isAuth: false})
+        )
+      }
     })
   }
 }

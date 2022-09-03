@@ -13,12 +13,6 @@ const ProfileStatus = ({propsStatus, setUserStatus}: ProfileStatusProps) => {
     setStatus(propsStatus)
   }, [propsStatus])
 
-  // componentDidUpdate(prevProps: {status: string}, prevState: object) {
-  //   if (prevProps.status !== this.props.status) {
-  //     this.setState({status: this.props.status})
-  //   }
-  // }
-
   const handleInput = ({target}: any) => {
     setStatus(target.value)
   }
@@ -46,7 +40,7 @@ const ProfileStatus = ({propsStatus, setUserStatus}: ProfileStatusProps) => {
         </div>
       ) : (
         <div>
-          <span onDoubleClick={activateEditMode}>{status}</span>
+          <span onDoubleClick={activateEditMode}>{propsStatus}</span>
         </div>
       )}
     </div>

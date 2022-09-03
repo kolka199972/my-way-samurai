@@ -13,10 +13,6 @@ const ProfileStatus = ({propsStatus, setUserStatus}: ProfileStatusProps) => {
     setStatus(propsStatus)
   }, [propsStatus])
 
-  const handleInput = ({target}: any) => {
-    setStatus(target.value)
-  }
-
   const activateEditMode = () => {
     setEditMode(true)
   }
@@ -24,6 +20,10 @@ const ProfileStatus = ({propsStatus, setUserStatus}: ProfileStatusProps) => {
   const deactivateEditMode = ({target}: any) => {
     setEditMode(false)
     setUserStatus(target.value)
+  }
+
+  const handleInput = ({target}: any) => {
+    setStatus(target.value)
   }
 
   return (

@@ -1,8 +1,13 @@
-import {IState} from '../models'
+import {createSelector} from 'reselect'
+import {IState, IUser} from '../models'
 
-export const getUsers = (state: IState) => {
+const getUsersSelector = (state: IState) => {
   return state.usersPage.users
 }
+
+export const getUsers = createSelector(getUsersSelector, (users: IUser[]) =>
+  users.filter((u) => true)
+)
 
 export const getCurrentPage = (state: IState) => {
   return state.usersPage.currentPage

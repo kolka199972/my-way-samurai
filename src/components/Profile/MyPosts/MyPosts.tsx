@@ -18,9 +18,11 @@ const MyPosts = ({posts, onCreateNewPost}: MyPostsProps) => {
     onCreateNewPost(values.newPostText)
   }
 
-  const postsElements = posts.map((p) => (
-    <Post key={p.id} message={p.message} likesCount={p.likesCount} />
-  ))
+  const postsElements = [...posts]
+    .reverse()
+    .map((p) => (
+      <Post key={p.id} message={p.message} likesCount={p.likesCount} />
+    ))
 
   return (
     <div className={s.postsBlock}>

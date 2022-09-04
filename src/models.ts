@@ -160,6 +160,11 @@ export type IActionInitializedSuccess = {
   type: 'SET_INITIALIZED'
 }
 
+export type IActionDeletePost = {
+  type: 'DELETE_POST'
+  postId: number
+}
+
 export type IAction =
   | IActionAddPost
   | IActionAddMessage
@@ -174,6 +179,7 @@ export type IAction =
   | IActionToggleFollowingInProgress
   | IActionSetStatus
   | IActionInitializedSuccess
+  | IActionDeletePost
 
 export interface IStore {
   _state: IState

@@ -141,7 +141,7 @@ export type IActionSetUserProfile = {
 }
 
 export type IActionSetAuthUserData = {
-  type: 'SET_AUTH_USER_DATA'
+  type: 'samurai/auth/SET_AUTH_USER_DATA'
   data: IAuthData
 }
 

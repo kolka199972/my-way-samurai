@@ -13,28 +13,6 @@ interface MyPostsProps {
 
 const maxLength20 = maxLengthCreator(20)
 
-const ProfileNewPostForm = ({handleSubmit}: any) => {
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <Field
-          component={Textarea}
-          name='newPostText'
-          placeholder='new post text...'
-          validate={[required, maxLength20]}
-        />
-      </div>
-      <div>
-        <button>Add post</button>
-      </div>
-    </form>
-  )
-}
-
-const ProfileReduxNewPostForm = reduxForm({form: 'ProfileNewPostText'})(
-  ProfileNewPostForm
-)
-
 const MyPosts = ({posts, onCreateNewPost}: MyPostsProps) => {
   const createNewPost = (values: any) => {
     onCreateNewPost(values.newPostText)
@@ -56,3 +34,25 @@ const MyPosts = ({posts, onCreateNewPost}: MyPostsProps) => {
 }
 
 export default MyPosts
+
+const ProfileNewPostForm = ({handleSubmit}: any) => {
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <Field
+          component={Textarea}
+          name='newPostText'
+          placeholder='new post text...'
+          validate={[required, maxLength20]}
+        />
+      </div>
+      <div>
+        <button>Add post</button>
+      </div>
+    </form>
+  )
+}
+
+const ProfileReduxNewPostForm = reduxForm({form: 'ProfileNewPostText'})(
+  ProfileNewPostForm
+)

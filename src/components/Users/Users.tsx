@@ -27,6 +27,7 @@ const Users = ({
   return (
     <>
       <Paginate
+        portionSize={10}
         currentPage={currentPage}
         totalUsersCount={totalUsersCount}
         pageSize={pageSize}

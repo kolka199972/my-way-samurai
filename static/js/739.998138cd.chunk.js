@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_way_samurai=self.webpackChunkreact_way_samurai||[]).push([[739],{1535:function(a,u,e){e.r(u);e(2791);var r=e(184);u.default=function(){return(0,r.jsx)("div",{children:"Music"})}}}]);
+//# sourceMappingURL=739.998138cd.chunk.js.map

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import {
   Route,
   Routes,
@@ -6,21 +6,28 @@ import {
   useNavigate,
   useParams
 } from 'react-router-dom'
-import DialogsContainer from './components/Dialogs/DialogsContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
-import Login from './components/Login/Login'
-import Music from './components/Music/Music'
 import Navbar from './components/Navbar/Navbar'
-import News from './components/News/News'
-import ProfileContainer from './components/Profile/ProfileContainer'
-import Settings from './components/Settings/Settings'
-import UsersContainer from './components/Users/UsersContainer'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {IState} from './models'
 import {initializeApp} from './redux/appReducer'
 import Preloader from './components/common/Preloader/Preloader'
 import './App.css'
+
+const ProfileContainer = React.lazy(
+  () => import('./components/Profile/ProfileContainer')
+)
+const DialogsContainer = React.lazy(
+  () => import('./components/Dialogs/DialogsContainer')
+)
+const UsersContainer = React.lazy(
+  () => import('./components/Users/UsersContainer')
+)
+const Login = React.lazy(() => import('./components/Login/Login'))
+const Music = React.lazy(() => import('./components/Music/Music'))
+const News = React.lazy(() => import('./components/News/News'))
+const Settings = React.lazy(() => import('./components/Settings/Settings'))
 
 interface AppProps {
   initializeApp: () => void
@@ -41,16 +48,18 @@ class App extends React.Component<AppProps, {}> {
         <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Routes>
-            <Route path='/profile/:userId' element={<ProfileContainer />} />
-            <Route path='/profile' element={<ProfileContainer />} />
-            <Route path='/dialogs/*' element={<DialogsContainer />} />
-            <Route path='/news' element={<News />} />
-            <Route path='/music' element={<Music />} />
-            <Route path='/settings' element={<Settings />} />
-            <Route path='/users' element={<UsersContainer />} />
-            <Route path='/login' element={<Login />} />
-          </Routes>
+          <Suspense fallback={<Preloader />}>
+            <Routes>
+              <Route path='/profile/:userId' element={<ProfileContainer />} />
+              <Route path='/profile' element={<ProfileContainer />} />
+              <Route path='/dialogs/*' element={<DialogsContainer />} />
+              <Route path='/news' element={<News />} />
+              <Route path='/music' element={<Music />} />
+              <Route path='/settings' element={<Settings />} />
+              <Route path='/users' element={<UsersContainer />} />
+              <Route path='/login' element={<Login />} />
+            </Routes>
+          </Suspense>
         </div>
       </div>
     )

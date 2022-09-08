@@ -165,6 +165,11 @@ export type IActionDeletePost = {
   postId: number
 }
 
+export type IActionSavePhoto = {
+  type: 'SAVE_PHOTO_SUCCESS'
+  photos: {large: string; small: string}
+}
+
 export type IAction =
   | IActionAddPost
   | IActionAddMessage
@@ -180,6 +185,7 @@ export type IAction =
   | IActionSetStatus
   | IActionInitializedSuccess
   | IActionDeletePost
+  | IActionSavePhoto
 
 export interface IStore {
   _state: IState

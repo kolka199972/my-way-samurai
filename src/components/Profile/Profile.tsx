@@ -7,13 +7,23 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 interface ProfileProps {
   profile: IProfileUser
   status: string
+  isOwner: boolean
   setUserStatus: (status: string) => void
+  savePhoto: (photo: any) => void
 }
 
-const Profile = ({profile, status, setUserStatus}: ProfileProps) => {
+const Profile = ({
+  profile,
+  isOwner,
+  status,
+  savePhoto,
+  setUserStatus
+}: ProfileProps) => {
   return (
     <div>
       <ProfileInfo
+        savePhoto={savePhoto}
+        isOwner={isOwner}
         profile={profile}
         status={status}
         setUserStatus={setUserStatus}

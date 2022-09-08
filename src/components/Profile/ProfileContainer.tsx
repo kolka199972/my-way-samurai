@@ -6,6 +6,7 @@ import {IProfileUser, IState} from '../../models'
 import {
   getUserProfile,
   getUserStatus,
+  savePhoto,
   setUserStatus
 } from '../../redux/profileReducer'
 import Profile from './Profile'
@@ -15,6 +16,7 @@ interface ProfileContainerProps {
   getUserProfile: (userId: number) => void
   getUserStatus: (id: number) => void
   setUserStatus: (status: string) => void
+  savePhoto: (photo: any) => void
   status: string
   profile: IProfileUser
   router: any
@@ -24,7 +26,7 @@ interface ProfileContainerProps {
 }
 
 class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
-  componentDidMount() {
+  refreshProfile = () => {
     let userId = this.props.router.params.userId
     if (!userId) {
       userId = 2
@@ -36,8 +38,29 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
     this.props.getUserProfile(userId)
     this.props.getUserStatus(userId)
   }
+
+  componentDidMount() {
+    this.refreshProfile()
+  }
+
+  componentDidUpdate(
+    prevProps: Readonly<ProfileContainerProps>,
+    prevState: Readonly<{}>,
+    snapshot?: any
+  ): void {
+    if (this.props.router.params.userId !== prevProps.router.params.userId) {
+      this.refreshProfile()
+    }
+  }
   render() {
-    return <Profile {...this.props} profile={this.props.profile} />
+    return (
+      <Profile
+        {...this.props}
+        savePhoto={this.props.savePhoto}
+        isOwner={!this.props.router.params.userId}
+        profile={this.props.profile}
+      />
+    )
   }
 }
 
@@ -53,7 +76,8 @@ const mapStateToProps = (state: IState) => {
 const mapDispatchObjectToProps = {
   getUserProfile,
   setUserStatus,
-  getUserStatus
+  getUserStatus,
+  savePhoto
 }
 
 export default compose(

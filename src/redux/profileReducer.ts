@@ -113,13 +113,18 @@ export const getUserStatus = (userId: number) => {
 
 export const setUserStatus = (status: string) => {
   return async (dispatch: any) => {
-    const data = await profileAPI.setUserStatus(status)
-    if (data.resultCode === 0) {
-      dispatch(setStatus(status))
-    } else {
-      const message = data.messages.length > 0 ? data.messages[0] : 'Some error'
-      dispatch(stopSubmit('ProfileData', {_error: message}))
-      return Promise.reject(message)
+    try {
+      const data = await profileAPI.setUserStatus(status)
+      if (data.resultCode === 0) {
+        dispatch(setStatus(status))
+      } else {
+        const message =
+          data.messages.length > 0 ? data.messages[0] : 'Some error'
+        dispatch(stopSubmit('ProfileData', {_error: message}))
+        return Promise.reject(message)
+      }
+    } catch (e: any) {
+      throw new Error(e.message)
     }
   }
 }

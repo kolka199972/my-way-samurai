@@ -35,8 +35,17 @@ interface AppProps {
 }
 
 class App extends React.Component<AppProps, {}> {
+  handleError = (promiseRejectionEvent: any) => {
+    console.log(promiseRejectionEvent)
+  }
+
   componentDidMount() {
     this.props.initializeApp()
+    window.addEventListener('unhandledrejection', this.handleError)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('unhandledrejection', this.handleError)
   }
 
   render() {
@@ -58,6 +67,8 @@ class App extends React.Component<AppProps, {}> {
               <Route path='/settings' element={<Settings />} />
               <Route path='/users' element={<UsersContainer />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/' element={<ProfileContainer />} />
+              <Route path='*' element={<div>404 NOT FOUND</div>} />
             </Routes>
           </Suspense>
         </div>

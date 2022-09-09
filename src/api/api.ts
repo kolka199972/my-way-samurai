@@ -53,12 +53,25 @@ export const authAPI = {
   me() {
     return instance.get(`auth/me`).then((response) => response.data)
   },
-  login(email: string, password: string, rememberMe: boolean) {
+  login(
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: string = ''
+  ) {
     return instance
-      .post('/auth/login', {email, password, rememberMe})
+      .post('/auth/login', {email, password, rememberMe, captcha})
       .then((response) => response.data)
   },
   logout() {
     return instance.delete('/auth/login').then((response) => response.data)
+  }
+}
+
+export const securityAPI = {
+  getCaptchaUrl() {
+    return instance
+      .get('security/get-captcha-url')
+      .then((response) => response.data)
   }
 }

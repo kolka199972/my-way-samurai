@@ -8,12 +8,7 @@ import {required} from '../../utils/validators'
 import {Input} from '../common/FormsControl/FormsControl'
 import s from './Login.module.css'
 
-interface LoginFormProps {
-  handleSubmit: any
-  error: string
-}
-
-const LoginForm = ({handleSubmit, error}: LoginFormProps) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}: any) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -43,6 +38,18 @@ const LoginForm = ({handleSubmit, error}: LoginFormProps) => {
         />{' '}
         remember me
       </div>
+      {captchaUrl && <img src={captchaUrl} alt='ava'></img>}
+      {captchaUrl && (
+        <div>
+          <Field
+            component={Input}
+            type='text'
+            placeholder='Symbols from page'
+            validate={[required]}
+            name='captcha'
+          />
+        </div>
+      )}
       {error && <div className={s.formSummaryError}>{error}</div>}
       <div>
         <button>Login</button>
@@ -51,16 +58,22 @@ const LoginForm = ({handleSubmit, error}: LoginFormProps) => {
   )
 }
 
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+const LoginReduxForm: any = reduxForm<any>({form: 'login'})(LoginForm)
 
 interface LoginProps {
-  login: (email: string, password: string, rememberMe: boolean) => void
+  login: (
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: string
+  ) => void
   isAuth: boolean
+  captchaUrl: string | undefined
 }
 
-const Login = ({login, isAuth}: LoginProps) => {
+const Login = ({login, isAuth, captchaUrl}: LoginProps) => {
   const onSubmit = (data: any) => {
-    login(data.email, data.password, data.rememberMe)
+    login(data.email, data.password, data.rememberMe, data.captcha)
   }
 
   if (isAuth) {
@@ -69,14 +82,15 @@ const Login = ({login, isAuth}: LoginProps) => {
   return (
     <div>
       <h1>Login</h1>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm captchaUrl={captchaUrl} onSubmit={onSubmit} />
     </div>
   )
 }
 
 const mapStateToProps = (state: IState) => {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
   }
 }
 

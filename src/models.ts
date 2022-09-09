@@ -73,6 +73,7 @@ export interface IAuth {
   email: string
   login: string
   isAuth: boolean
+  captchaUrl?: string
 }
 
 export interface IAuthData {
@@ -170,6 +171,11 @@ export type IActionSavePhoto = {
   photos: {large: string; small: string}
 }
 
+export type IActionGetCaptchaUrl = {
+  type: 'samurai/auth/GET_CAPTCHA_URL'
+  captchaUrl: string
+}
+
 export type IAction =
   | IActionAddPost
   | IActionAddMessage
@@ -186,6 +192,7 @@ export type IAction =
   | IActionInitializedSuccess
   | IActionDeletePost
   | IActionSavePhoto
+  | IActionGetCaptchaUrl
 
 export interface IStore {
   _state: IState

@@ -33,7 +33,7 @@ export interface IUser {
 
 export interface IProfileUser {
   aboutMe: string
-  contacts: object
+  contacts: any
   fullName: string
   lookingForAJob: boolean
   lookingForAJobDescription: string

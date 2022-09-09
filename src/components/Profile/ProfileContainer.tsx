@@ -7,6 +7,7 @@ import {
   getUserProfile,
   getUserStatus,
   savePhoto,
+  saveProfile,
   setUserStatus
 } from '../../redux/profileReducer'
 import Profile from './Profile'
@@ -17,6 +18,7 @@ interface ProfileContainerProps {
   getUserStatus: (id: number) => void
   setUserStatus: (status: string) => void
   savePhoto: (photo: any) => void
+  saveProfile: (profile: any) => void
   status: string
   profile: IProfileUser
   router: any
@@ -59,6 +61,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps, {}> {
         savePhoto={this.props.savePhoto}
         isOwner={!this.props.router.params.userId}
         profile={this.props.profile}
+        saveProfile={this.props.saveProfile}
       />
     )
   }
@@ -77,7 +80,8 @@ const mapDispatchObjectToProps = {
   getUserProfile,
   setUserStatus,
   getUserStatus,
-  savePhoto
+  savePhoto,
+  saveProfile
 }
 
 export default compose(

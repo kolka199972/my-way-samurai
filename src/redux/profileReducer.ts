@@ -1,6 +1,7 @@
 import {IProfilePage, IProfileUser} from './../models'
 import {IAction} from '../models'
 import {profileAPI} from '../api/api'
+import {stopSubmit} from 'redux-form'
 
 const ADD_POST = 'ADD_POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -115,6 +116,10 @@ export const setUserStatus = (status: string) => {
     const data = await profileAPI.setUserStatus(status)
     if (data.resultCode === 0) {
       dispatch(setStatus(status))
+    } else {
+      const message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+      dispatch(stopSubmit('ProfileData', {_error: message}))
+      return Promise.reject(message)
     }
   }
 }
@@ -124,6 +129,16 @@ export const savePhoto = (photo: any) => {
     const data = await profileAPI.savePhoto(photo)
     if (data.resultCode === 0) {
       dispatch(savePhotoSuccess)
+    }
+  }
+}
+
+export const saveProfile = (profile: any) => {
+  return async (dispatch: any, getState: any) => {
+    const userId = getState().auth.userId
+    const data = await profileAPI.saveProfile(profile)
+    if (data.resultCode === 0) {
+      dispatch(getUserProfile(userId))
     }
   }
 }

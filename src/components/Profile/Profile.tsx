@@ -10,6 +10,7 @@ interface ProfileProps {
   isOwner: boolean
   setUserStatus: (status: string) => void
   savePhoto: (photo: any) => void
+  saveProfile: (profile: any) => void
 }
 
 const Profile = ({
@@ -17,11 +18,13 @@ const Profile = ({
   isOwner,
   status,
   savePhoto,
+  saveProfile,
   setUserStatus
 }: ProfileProps) => {
   return (
     <div>
       <ProfileInfo
+        saveProfile={saveProfile}
         savePhoto={savePhoto}
         isOwner={isOwner}
         profile={profile}
